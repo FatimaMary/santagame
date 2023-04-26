@@ -3,21 +3,26 @@ import { Box, Typography } from '@mui/material';
 
 function Header() {
   return (
-    <Box>
+    <Box 
+        display='flex'
+        gap='15px'
+        flexDirection='column'
+    >
         <Typography 
             variant='h3'
             fontWeight='bold'
             fontStyle='italic'
+            color='red'
         >
             Secret Santa Generator
-        </Typography>
-        <Typography>
+        </Typography >
+        <Typography color='green'>
             Organise your Secret Santa using Email or WhatsApp.
         </Typography>
-        <Typography>
+        <Typography color='green'>
             Have you drawn names before?
         </Typography>
-        <Typography>
+        <Typography color='green'>
             Use your 2022 group to make sure no one draws last year's gift exchange name.
         </Typography>
     </Box>
