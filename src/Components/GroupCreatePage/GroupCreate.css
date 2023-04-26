@@ -1,0 +1,341 @@
+:root {
+    --primary-color: rgb(11, 78, 179);
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  
+  .MainItemsM{
+    text-align: left;
+    padding: 50px;
+    /* height: 100vh;
+    background-image:url(/src/img/img.jpg);
+    background-repeat: repeat; */
+  }
+  
+  /* Global Stylings */
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  #username {
+    display: block;
+    width: 40%;
+    padding: 0.75rem;
+    border: 1px solid #c2c2c2;
+    border-radius: 0.25rem;
+    text-align: left;
+    color: #414141;
+    text-align: left;
+  }
+.additional-inputs{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+  .text-center {
+    text-align: left;
+    color: #6aa4fb;
+    font-size: 20px;
+    /* margin-top: -10px; */
+  }
+
+  .text-centerN {
+    text-align: left;
+    font-size: 20px;
+    margin-top: 0;
+    color: #414141;
+  }
+  
+  /* Progressbar */
+  .progressbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    counter-reset: step;
+    margin: 2rem 0 2rem;
+  }
+  
+  .progressbar::before,
+  .progress {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-20%);
+    height: 4px;
+    width: 100%;
+    background-color: #6aa4fb;
+    z-index: -1;
+  }
+  
+  .progress {
+    /* background-color: var(--primary-color); */
+    width: 0%;
+    transition: 0.3s;
+  }
+  
+  .progress-step {
+    width: 2.1875rem;
+    height: 2.1875rem;
+    background-color: #6aa4fb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .progress-step::before {
+    counter-increment: step;
+    content: counter(step);
+  }
+  
+  .progress-step::after {
+    content: attr(data-title);
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    font-size: 0.85rem;
+    color:#6aa4fb;
+  }
+  
+  .progress-step-active {
+    background-color: var(--primary-color);
+    color:white; 
+  }
+  
+  /* Form */
+  .form {
+    /* width: clamp(320px, 30%, 430px); */
+    margin: 0;
+    border-radius: 0.35rem;
+    padding: 50px;
+  }
+  
+  .form-step {
+    display: none;
+    transform-origin: top;
+    animation: animate 0.5s;
+  }
+  
+  .form-step-active {
+    display: block;
+  }
+  
+  .input-group{
+    display: flex;
+    align-items: left;
+  }
+  
+  .input-group > input,
+  .input-group > select {
+    margin: 1rem 0;
+    width: 40%;
+    padding: 0.75rem;
+    border: 1px solid #c2c2c2;
+    border-radius: 0.25rem;
+    text-align: left;
+    color: #414141;
+    text-align: left;
+  }
+
+
+  .Para{
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #414141;
+    display: flex;
+  }
+  
+  .ParaT{
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+
+  h1{
+    color: #414141;
+    font-size: 40px;
+    text-align: left;
+  }
+
+  .SideBarN{
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .blue{
+    color: #6aa4fb;
+  }
+
+  .blue:hover{
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  textarea{
+    width: 40%;
+    height: 100px;  
+    border-radius: 0.25rem;
+    overflow-y: scroll;
+  }
+
+  .checkBoxType{
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    justify-content: space-between;
+  }
+ 
+  select {
+    display: block;
+    width: 80%;
+    padding: 0.75rem;
+    border: 1px solid #c2c2c2;
+    border-radius: 0.25rem;
+    text-align: left;
+    color: #414141;
+    text-align: left;
+  }
+
+  @keyframes animate {
+    from {
+      transform: scale(1, 0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1, 1);
+      opacity: 1;
+    }
+  }
+  
+  /* Button */
+  .btns-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  
+  }
+  
+  .btn {
+    padding: 0.75rem;
+    width: 10%;
+    display: block;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: #f3f3f3;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 30rem;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+    background-color: #6aa4fb;
+  }
+
+  .mainitems-btn{
+  border-radius: 30px;
+  background-color: #6aa4fb;
+  color: #f3f3f3;
+  font-weight: bold;
+  border: none;
+  width: 20%;
+  padding: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.box{
+  padding: 0px 50px;
+}
+
+  
+.input-group-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.input-group-box > input {
+  margin: 1rem 0;
+  width: 80%;
+  padding: 0.75rem;
+  
+  border: 1px solid #c2c2c2;
+  border-radius: 0.25rem;
+  text-align: left;
+  color: #414141;
+  text-align: left;
+}
+
+.big{
+  font-size: 20px;
+  color: #aeaeae;
+}
+
+  
+.input-group-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.input-group-box > input {
+  margin: 1rem 0;
+  width: 40%;
+  padding: 0.75rem;
+  border: 1px solid #c2c2c2;
+  border-radius: 0.25rem;
+  text-align: left;
+  color: #414141;
+  text-align: left;
+}
+
+
+boxnote,
+.textarea-boxnote{
+  color: lightgray;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-left: 15px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+
+.big{
+  font-size: 20px;
+  color: #aeaeae;
+}
+
+@media(max-width: 768px) {
+  .form{
+    margin:0;
+    padding: 25px;
+  }
+  .box{
+    padding: 25px;
+  }
+  #username,
+  .input-group > input{
+    width: 100%;
+  }
+  .mainitems-btn{
+    width: 60%;
+  }
+  .input-group > select {
+    width: 100%;
+  }
+  textarea{
+    width: 100%;
+  }
+}
+
