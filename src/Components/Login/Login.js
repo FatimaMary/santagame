@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, FormControl,TextField, Button } from '@mui/material';
 // import { TextField  } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
+import validation from './Validation';
 
 function Login() {
     const navigate = useNavigate();
@@ -83,29 +84,33 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <Box 
+            <Box 
                 sx={{
                     display: 'flex',
                     justifyContent: 'center'
                 }}
                 mb='15px'
-            > */}
+            >
                 <Button 
                     sx={{ 
                         border: '2px solid skyblue',
                         borderRadius: '20px',
                         width: '200px',
                         fontSize: '1rem',
-                        color: 'red',
+                        color: 'green',
                     }}
                    type="submit"
                 >
                     Login
                 </Button>
-            {/* </Box> */}
+            </Box>
         </FormControl>
         <Box>
-            <Typography>Forgot your password?</Typography>
+            <Typography
+                sx={{cursor: 'pointer'}}
+            >
+                Forgot your password?
+            </Typography>
         </Box>
     </Box>
   )
