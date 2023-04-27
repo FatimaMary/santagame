@@ -6,6 +6,10 @@ import MessageToOrganiser from './Components/MessageToOrganiser/MessageToOrganis
 import NavBar from './Components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './Components/Register/Register';
+import Reset from './Components/Login/Reset';
+import GiftExchangePage1 from './Components/GiftExchangePages/GiftExchangePage1';
+import GiftExchangePage2 from './Components/GiftExchangePages/GiftExchangePage2';
+import GiftExchangePage3 from './Components/GiftExchangePages/GiftExchangePage3';
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
           <Route path='invitation' element={<Invitation/>} />
           <Route path='copyinvitation' element={<CopyInvitation/>} />
           <Route path='register' element={<Register/>} />
+          <Route path='reset' element={<Reset/>}/>
+          <Route path='giftexchange1' element={<GiftExchangePage1/>} />
+          <Route path='giftexchange2' element={<GiftExchangePage2/>} />
+          <Route path='giftexchange3' element={<GiftExchangePage3/>}/>
+          {/* <Route/> */}
         </Routes>
       </BrowserRouter>
     </div>
