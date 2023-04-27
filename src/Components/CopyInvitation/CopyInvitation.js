@@ -10,15 +10,37 @@ function CopyInvitation() {
         alert(`You have copied "${copyText}"`);
     }
   return (
-    <Box >
-        <Typography>
+    <Box 
+       m='1.5rem 2.5rem'
+       sx={{ display: 'flex', flexDirection: 'column', gap: '20px'}}
+       width={500}
+    >
+        <Typography 
+            variant='h4'
+            color='green'
+            fontWeight='bold'
+        >
             There is one thing left to do
         </Typography>
-        <Box>
-            <Typography>
+        <Box
+        //    border='1px solid red'
+           height={100}
+           sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '20px'
+            }}
+        >
+            <Typography
+                variant='body1'
+                color='blue'
+            >
                 Copy the invitation and share it with each member of your group
             </Typography>
-            <Typography>
+            <Typography
+                variant='body1'
+                color='blue'
+            >
                 People can join using the link in the invitation
             </Typography>
         </Box>
@@ -35,8 +57,30 @@ function CopyInvitation() {
         //   defaultValue="Default Value"
         />
         {/* </Typography> */}
-        <Button onClick={copyToClipboard}>Copy Invitation</Button>
-        <Typography>
+        <Box
+         sx={{display: 'flex', justifyContent: 'center'}}
+        >
+            <Button 
+                onClick={copyToClipboard}
+                variant='outlined'
+                sx={{ 
+                    border: '1px solid red', 
+                    backgroundColor: 'red', 
+                    width: '200px',
+                    borderRadius: '25px',
+                    color: 'green'
+                }}
+                // width='200px'
+                
+            >
+                Copy Invitation
+            </Button>
+        </Box>
+        <Typography
+            fontSize='1.25rem'
+            color='#F2E3DB'
+            sx={{cursor: 'pointer'}}
+        >
             <a>Visit the group page</a>
         </Typography>
     </Box>

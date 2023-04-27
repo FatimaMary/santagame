@@ -5,6 +5,7 @@ import Login from './Components/Login/Login';
 import MessageToOrganiser from './Components/MessageToOrganiser/MessageToOrganiser';
 import NavBar from './Components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from './Components/Register/Register';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='message' element={<MessageToOrganiser/>} />
           <Route path='invitation' element={<Invitation/>} />
           <Route path='copyinvitation' element={<CopyInvitation/>} />
+          <Route path='register' element={<Register/>} />
         </Routes>
       </BrowserRouter>
     </div>
