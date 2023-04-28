@@ -27,3 +27,12 @@ app.use("/playgroup", playGroupRoutes);
 app.use("/groupplayers", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/products", productRoutes);
+
+// MONGOOSE SETUP
+const PORT = process.env.PORT || 9000;
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
+});
