@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterValidation from '../../Components/RegisterValidation';
-import { Box, Typography, TextField, FormControl, Button } from '@mui/material';
+import { Box, Typography, TextField, FormControl as Form, Button, } from '@mui/material';
 
 
 function Register() {
@@ -9,6 +9,7 @@ function Register() {
         name: "",
         email: "",
         password: "",
+        mobileNumber: "",
     });
     const [errors, setErrors] = useState({});
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
@@ -24,13 +25,15 @@ function Register() {
     }
 
     const handleSubmit = (e) => {
-        setLoading(true);
+        // setLoading(true);
         e.preventDefault();
-        setErrors(RegisterValidation(registerData));
-        setDataIsCorrect(true);
+        console.log("button clicked");
+        // setErrors(RegisterValidation(registerData));
+        // setDataIsCorrect(true);
         const name = e.target[0].value;
-        const email = e.target[1].value;
-        const password = e.target[2].value;
+        const mobileNumber = e.target[1].value
+        const email = e.target[2].value;
+        const password = e.target[3].value;
     }
 
   return (
@@ -62,82 +65,96 @@ function Register() {
                 Register to get started on your wishlist immediately
             </Typography>
         </Box>
-        <FormControl
-          sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '10px', 
-
-        }}
-        onSubmit={handleSubmit}
-        >
-            <TextField 
-                id="outlined-basic" 
-                label="Name" 
-                variant="outlined" 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
+        <form onSubmit={handleSubmit}>
+            <Box
+                sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '10px', 
                 }}
-                type='text'
-                name='name'
-                value={registerData.name}
-                onChange={updateHandleChange}
-            />
-            {errors.name && <p className="error">{errors.name}</p>}
-            <TextField 
-                id="outlined-basic" 
-                label="Email" 
-                variant="outlined" 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
-                }}
-                type='email'
-                name='email'
-                value={registerData.email}
-                onChange={updateHandleChange}
-            />
-            {errors.email && <p className="error">{errors.email}</p>}
-            <TextField 
-                id='outlined-basic' 
-                label='Password' 
-                variant='outlined' 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
-                }}
-                type='password'
-                name='password'
-                value={registerData.password}
-                onChange={updateHandleChange}
-            />
-            {errors.password && <p className="error">{errors.password}</p>}
-            <Box 
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}
-                mb='15px'
             >
-                <Button 
-                    sx={{ 
-                        border: '2px solid skyblue',
-                        borderRadius: '20px',
-                        width: '200px',
-                        fontSize: '1rem',
-                        color: 'green',
+                <TextField 
+                    id="outlined-basic" 
+                    label="Name" 
+                    variant="outlined" 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
                     }}
-                   type="submit"
+                    type='text'
+                    name='name'
+                    value={registerData.name}
+                    onChange={updateHandleChange}
+                />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Mobile Number" 
+                    variant="outlined" 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
+                    }}
+                    type='text'
+                    name='mobileNumber'
+                    value={registerData.mobileNumber}
+                    onChange={updateHandleChange}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
+                <TextField 
+                    id="outlined-basic" 
+                    label="Email" 
+                    variant="outlined" 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
+                    }}
+                    type='email'
+                    name='email'
+                    value={registerData.email}
+                    onChange={updateHandleChange}
+                />
+                {errors.email && <p className="error">{errors.email}</p>}
+                <TextField 
+                    id='outlined-basic' 
+                    label='Password' 
+                    variant='outlined' 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
+                    }}
+                    type='password'
+                    name='password'
+                    value={registerData.password}
+                    onChange={updateHandleChange}
+                />
+                {errors.password && <p className="error">{errors.password}</p>}
+                <Box 
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                    mb='15px'
                 >
-                    Register
-                </Button>
-                {err && <span>Something went wrong</span>}
+                    <Button 
+                        sx={{ 
+                            border: '2px solid skyblue',
+                            borderRadius: '20px',
+                            width: '200px',
+                            fontSize: '1rem',
+                            color: 'green',
+                        }}
+                    type="submit"
+                    >
+                        Register
+                    </Button>
+                    {err && <span>Something went wrong</span>}
+                </Box>
             </Box>
-        </FormControl>
+        </form>
     </Box>
   )
 }

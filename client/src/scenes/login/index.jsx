@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, FormControl,TextField, Button } from '@mui/material';
+import { Box, Typography, TextField, Button } from '@mui/material';
 // import { TextField  } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import validation from '../../Components/Validation';
@@ -39,72 +39,72 @@ function Login() {
                 <Link to='/register'>Register Here </Link>)
             </Typography> */}
         </Box>
-        <FormControl
-          sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '10px', 
-
-        }}
-        onSubmit={handleSubmit}
-        >
-            <TextField 
-                id="outlined-basic" 
-                label="Name" 
-                variant="outlined" 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
-                }}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField 
-                id="outlined-basic" 
-                label="Email" 
-                variant="outlined" 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
-                }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField 
-                id='outlined-basic' 
-                label='Password' 
-                variant='outlined' 
-                sx={{
-                    margin: '1rem',
-                    width: '400px',
-                    borderRadius: '10px',
-                }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <Box 
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}
-                mb='15px'
+        <form onSubmit={handleSubmit}>
+            <Box
+            sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '10px', 
+            }}
             >
-                <Button 
-                    sx={{ 
-                        border: '2px solid skyblue',
-                        borderRadius: '20px',
-                        width: '200px',
-                        fontSize: '1rem',
-                        color: 'green',
+                <TextField 
+                    id="outlined-basic" 
+                    label="Name" 
+                    variant="outlined" 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
                     }}
-                   type="submit"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Email" 
+                    variant="outlined" 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
+                    }}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField 
+                    id='outlined-basic' 
+                    label='Password' 
+                    variant='outlined' 
+                    sx={{
+                        margin: '1rem',
+                        width: '400px',
+                        borderRadius: '10px',
+                    }}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Box 
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                    mb='15px'
                 >
-                    Login
-                </Button>
+                    <Button 
+                        sx={{ 
+                            border: '2px solid skyblue',
+                            borderRadius: '20px',
+                            width: '200px',
+                            fontSize: '1rem',
+                            color: 'green',
+                        }}
+                    type="submit"
+                    >
+                        Login
+                    </Button>
+                </Box>
             </Box>
-        </FormControl>
+        </form>
         <Box>
             <Typography
                 sx={{cursor: 'pointer'}}
