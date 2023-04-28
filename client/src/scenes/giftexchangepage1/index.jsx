@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import GiftExchangePage2 from './GiftExchangePage2';
+// import GiftExchangePage2 from './giftexchange2';
 import { useNavigate } from 'react-router-dom';
 import { BiRupee } from "react-icons/bi";
 

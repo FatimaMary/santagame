@@ -1,6 +1,6 @@
 import "./GroupCreate.css";
 import React, { useState, useCallback } from "react";
-import Header from "../Header/Header";
+import Header from "../../Components/Header";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -13,8 +13,8 @@ import { Checkbox } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useNavigate } from "react-router-dom";
-// import Message from "../Message/Message";
-import MainValidation from "./MainValidation";
+// import MainValidation from "./MainValidation";
+import MainValidation from '../../Components/MainValidation';
 import { getStyleValue } from "@mui/system";
 import { BiRupee } from "react-icons/bi";
 

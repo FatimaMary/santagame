@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, FormControl,TextField, Button } from '@mui/material';
 // import { TextField  } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import validation from './Validation';
+import validation from '../../Components/Validation';
 
 function Login() {
     const navigate = useNavigate();

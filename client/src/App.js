@@ -1,16 +1,19 @@
-import CopyInvitation from './Components/CopyInvitation/CopyInvitation';
-import GroupCreate from './Components/GroupCreatePage/GroupCreate';
-import Invitation from './Components/Invitation/Invitation';
-import Login from './Components/Login/Login';
-import MessageToOrganiser from './Components/MessageToOrganiser/MessageToOrganiser';
 import NavBar from './Components/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Register from './Components/Register/Register';
-import Reset from './Components/Login/Reset';
-import GiftExchangePage1 from './Components/GiftExchangePages/GiftExchangePage1';
-import GiftExchangePage2 from './Components/GiftExchangePages/GiftExchangePage2';
-import GiftExchangePage3 from './Components/GiftExchangePages/GiftExchangePage3';
-import GiftExchangePage4 from './Components/GiftExchangePages/GiftExchangePage4';
+import Login from './scenes/login';
+import GroupCreate from './scenes/groupcreatepage';
+import MessageToOrganiser from './scenes/messagetoorganiser';
+import Invitation from './scenes/invitation';
+import CopyInvitation from './scenes/copyinvitation';
+import Register from './scenes/register';
+import Reset from './scenes/reset';
+import GiftExchangePage1 from './scenes/giftexchangepage1';
+import GiftExchangePage2 from './scenes/giftexchangepage2';
+import GiftExchangePage3 from './scenes/giftexchangepage3';
+import GiftExchangePage4 from './scenes/giftexchangepage4';
+import GiftFinder from './scenes/giftfinder';
+
+
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
       <NavBar/>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Login/>} />
           <Route path='login' element={<Login/>}/>
           <Route path='groupcreate' element={<GroupCreate/>} />
           <Route path='message' element={<MessageToOrganiser/>} />
@@ -29,6 +33,7 @@ function App() {
           <Route path='giftexchange2' element={<GiftExchangePage2/>} />
           <Route path='giftexchange3' element={<GiftExchangePage3/>}/>
           <Route path='giftexchange4' element={<GiftExchangePage4/>}/>
+          <Route path='giftfinder' element={<GiftFinder/>} />
         </Routes>
       </BrowserRouter>
     </div>

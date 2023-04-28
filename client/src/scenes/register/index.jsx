@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RegisterValidation from './RegisterValidation';
+import RegisterValidation from '../../Components/RegisterValidation';
 import { Box, Typography, TextField, FormControl, Button } from '@mui/material';
 
 
