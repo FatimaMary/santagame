@@ -21,11 +21,11 @@ function GiftExchangePage2() {
       <Box>
         <Typography>Your own name</Typography>
         <Select>
-          <MenuItem value={organiser}>Organiser</MenuItem>
-          <MenuItem value={user1}>User1</MenuItem>
-          <MenuItem value={user2}>User2</MenuItem>
-          <MenuItem value={user3}>User3</MenuItem>
-          <MenuItem value={user4}>User4</MenuItem>
+          <MenuItem >Organiser</MenuItem>
+          <MenuItem >User1</MenuItem>
+          <MenuItem >User2</MenuItem>
+          <MenuItem >User3</MenuItem>
+          <MenuItem >User4</MenuItem>
         </Select>
       </Box>
       {show ? null : (<Box>

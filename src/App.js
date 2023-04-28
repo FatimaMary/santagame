@@ -10,6 +10,7 @@ import Reset from './Components/Login/Reset';
 import GiftExchangePage1 from './Components/GiftExchangePages/GiftExchangePage1';
 import GiftExchangePage2 from './Components/GiftExchangePages/GiftExchangePage2';
 import GiftExchangePage3 from './Components/GiftExchangePages/GiftExchangePage3';
+import GiftExchangePage4 from './Components/GiftExchangePages/GiftExchangePage4';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route path='giftexchange1' element={<GiftExchangePage1/>} />
           <Route path='giftexchange2' element={<GiftExchangePage2/>} />
           <Route path='giftexchange3' element={<GiftExchangePage3/>}/>
-          {/* <Route/> */}
+          <Route path='giftexchange4' element={<GiftExchangePage4/>}/>
         </Routes>
       </BrowserRouter>
     </div>

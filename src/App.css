@@ -27,7 +27,7 @@ font-family: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 body {
-  background-image:url(/src/img/gift.png);
+  /* background-image:url(/src/img/gift.png); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
