@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterValidation from '../../Components/RegisterValidation';
 import { Box, Typography, TextField, FormControl as Form, Button, } from '@mui/material';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 function Register() {
