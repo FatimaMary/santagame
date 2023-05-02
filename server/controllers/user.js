@@ -4,6 +4,7 @@ const { objectId } = mongoose.Types;
 
 export const postUser = (req, res) => {
     const userId = req.body.userId;
+    console.log("userId: ", userId);
     const name = req.body.name;
     const mobileNumber = req.body.mobileNumber;
     const email = req.body.email;
@@ -19,7 +20,7 @@ export const postUser = (req, res) => {
 
     newUser
         .save()
-        .then(() => res.json("New User Added"))
+        .then((data) => res.json("New User Added"))
         .catch((err) => res.status(400).json("Error: " + err));
 };
 
