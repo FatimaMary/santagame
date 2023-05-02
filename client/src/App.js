@@ -21,7 +21,7 @@ function App() {
       <NavBar/>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login/>} />
+          <Route path='/' element={<Register/>} />
           <Route path='login' element={<Login/>}/>
           <Route path='groupcreate' element={<GroupCreate/>} />
           <Route path='message' element={<MessageToOrganiser/>} />

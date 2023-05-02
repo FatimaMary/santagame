@@ -33,9 +33,12 @@ export const getAllGroups = (req, res) => {
 
 export const updatePlayGroup = (req, res) => {
     const groupId = req.params.groupId;
-    playgroups.findOne({ groupId: groupId })
-        .then((group) => {
-            // group.friendsName = 
-            // { $push: { <friendsName>: <value1>, ... } }
-        })
+    // playgroups.updateOne({ groupId: groupId })
+    //     .then((group) => {
+    //         // group.friendsName = 
+    //         { $push: { friendsName: } }
+    //     })
+    playgroups.updateOne(
+        { $push: { friendsName: req.body.friendsName }}
+    )
 }

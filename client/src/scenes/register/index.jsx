@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterValidation from '../../Components/RegisterValidation';
 import { Box, Typography, TextField, FormControl as Form, Button, } from '@mui/material';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from '../../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 function Register() {
     const [registerData, setRegisterData] = useState({
@@ -25,16 +27,52 @@ function Register() {
         })
     }
 
-    const handleSubmit = (e) => {
-        // setLoading(true);
+    const handleSubmit = async(e) => {
+        setLoading(true);
         e.preventDefault();
-        console.log("button clicked");
         // setErrors(RegisterValidation(registerData));
-        // setDataIsCorrect(true);
-        const name = e.target[0].value;
-        const mobileNumber = e.target[1].value
-        const email = e.target[2].value;
-        const password = e.target[3].value;
+        setDataIsCorrect(true);
+         createUserWithEmailAndPassword(auth, registerData.email, registerData.password)
+            .then(async (res) => {
+                const user = res.user;
+                await updateProfile(user, {
+                    displayName: registerData.name
+                });
+                // create profile here
+                await setDoc(doc(db, "users", res.user.uid), {
+                    uid: res.user.uid,
+                    name: registerData.name,
+                    mobileNumber: registerData.mobileNumber,
+                    email: registerData.email,
+                    password: registerData.password,
+                });
+                console.log("Register with firebase");
+
+                //Make the POST request to your API end point
+                fetch("http://localhost:5001/user/add", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userId: user.uid,
+                        name: registerData.name,
+                        mobileNumber: registerData.mobileNumber,
+                        email: registerData.email,
+                        password: registerData.password
+                    }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("data: " , data);
+                    console.log("fetch id: ", data.userId);
+                    navigate("/groupcreate");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setErrors(error.message);
+                });
+            })
     }
 
   return (
@@ -42,7 +80,7 @@ function Register() {
       sx={{
         display: 'flex', 
         flexDirection: 'column' ,
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
         justifyContent: 'center',
         alignItems: 'center'
     }}
@@ -75,7 +113,7 @@ function Register() {
                 }}
             >
                 <TextField 
-                    id="outlined-basic" 
+                    // id="outlined-basic" 
                     label="Name" 
                     variant="outlined" 
                     sx={{
@@ -89,7 +127,7 @@ function Register() {
                     onChange={updateHandleChange}
                 />
                 <TextField 
-                    id="outlined-basic" 
+                    // id="outlined-basic" 
                     label="Mobile Number" 
                     variant="outlined" 
                     sx={{
@@ -104,7 +142,7 @@ function Register() {
                 />
                 {errors.name && <p className="error">{errors.name}</p>}
                 <TextField 
-                    id="outlined-basic" 
+                    // id="outlined-basic" 
                     label="Email" 
                     variant="outlined" 
                     sx={{
@@ -119,7 +157,7 @@ function Register() {
                 />
                 {errors.email && <p className="error">{errors.email}</p>}
                 <TextField 
-                    id='outlined-basic' 
+                    // id='outlined-basic' 
                     label='Password' 
                     variant='outlined' 
                     sx={{
@@ -156,6 +194,7 @@ function Register() {
                 </Box>
             </Box>
         </form>
+        <Typography>You do have an account? Login</Typography>
     </Box>
   )
 }
