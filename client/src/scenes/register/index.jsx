@@ -67,7 +67,7 @@ function Register() {
                 .then((data) => {
                     console.log("data: " , data);
                     console.log("fetch id: ", data.userId);
-                    // navigate("/groupcreate");
+                    navigate("/groupcreate");
                 })
                 .catch((error) => {
                     console.log(error);

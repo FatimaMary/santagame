@@ -20,7 +20,7 @@ import { BiRupee } from "react-icons/bi";
 import axios from 'axios';
 
 
-export default function VerticalLinearStepper() {
+export default function VerticalLinearStepper( { userId } ) {
   const [date, setDate] = useState();
   const [show, setShow] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
@@ -30,6 +30,32 @@ export default function VerticalLinearStepper() {
   const [value, setValue] = useState("");
   const [isShown, setIsShown] = useState(false);
   const [email, setEmail] = useState();
+  const [groupName, setGroupName] = useState();
+  const [budget, setBudget] = useState();
+
+  const amounts = [
+    { value: " " , text: "Budget"},
+    { value: "250" , text: "250"},
+    { value: "500" , text: "500"},
+    { value: "750" , text: "750"},
+    { value: "1000" , text: "1000"},
+    { value: "1250" , text: "1250"},
+    { value: "1500" , text: "1500"},
+    { value: "1750" , text: "1750"},
+    { value: "2000" , text: "2000"},
+    { value: "2500" , text: "2500"},
+    { value: "3000" , text: "3000"},
+    { value: "4000" , text: "4000"},
+    { value: "5000" , text: "5000"},
+    { value: "6000" , text: "6000"},
+    { value: "7500" , text: "7500"},
+    { value: "10000" , text: "10000"},
+    { value: "12500" , text: "12500"},
+    { value: "25000" , text: "25000"},
+    { value: "37500" , text: "37500"},
+    { value: "50000" , text: "50000"},
+
+  ]
 
   // const handleDeleteIcon = (event) => {
   //   setIsShown(true);
@@ -91,8 +117,18 @@ export default function VerticalLinearStepper() {
   const handleConfirm = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:2318/group/add", {
-        
+      .post("http://localhost:2318/group/addgroup", {
+        organiserName: organiserName,
+        friendesName: names,
+        groupName: groupName,
+        budget: budget,
+        date: date,
+        email: email,
+        userId: userId
+      })
+      .then((response) => {
+        console.log("Post group response: " , response);
+        console.log("New Group data: ", response.data);
       })
     // navigate("/Message");
   };
@@ -111,7 +147,7 @@ export default function VerticalLinearStepper() {
           <div>
             {names.map((data, i) => {
               return (
-                <div>
+                <div key={i}>
                   {i === 0 && <h2 className="text-centerN">Draw names with</h2>}
                   {
                     <div className="input-group" >
@@ -167,6 +203,8 @@ export default function VerticalLinearStepper() {
               name="username"
               id="username"
               placeholder="Enter a title for the gift exchange"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
             />
           </div>
 
@@ -210,26 +248,12 @@ export default function VerticalLinearStepper() {
             </h2>
 
             <div className="input-group">
-              <select placeholder="select budget">
-                <option>Select Budget</option>
-                <option><BiRupee/>250</option>
-                <option><BiRupee/>500</option>
-                <option><BiRupee/>750</option>
-                <option><BiRupee/>1000</option>
-                <option><BiRupee/>1250</option>
-                <option><BiRupee/>1500</option>
-                <option><BiRupee/>1750</option>
-                <option><BiRupee/>2000</option>
-                <option><BiRupee/>2500</option>
-                <option><BiRupee/>3,000</option>
-                <option><BiRupee/>4,000</option>
-                <option><BiRupee/>5,000</option>
-                <option><BiRupee/>7,500</option>
-                <option><BiRupee/>10,000</option>
-                <option><BiRupee/>12,500</option>
-                <option><BiRupee/>25,000</option>
-                <option><BiRupee/>37,500</option>
-                <option><BiRupee/>50,000</option>
+              <select value={budget} onChange={(e) => setBudget(e.target.value)}>
+                {amounts.map((options) => (
+                  <option key={options.value} value={options.value}>
+                    <BiRupee/>{options.text}
+                  </option>
+                ))}
               </select>
               {/* <box onClick={() => setShow((show) => !show)}>
                 {show ? null : (
@@ -286,7 +310,7 @@ export default function VerticalLinearStepper() {
       <Box className="box" x={{ maxWidth: 600 }}>
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
-            <Step key={step.label}>
+            <Step key={index}>
               <StepLabel
                 optional={
                   index === 2 ? (

@@ -46,6 +46,6 @@ GroupNamesSchema.plugin(autoIncrement.plugin, {
     incrementBy: 1,
 });
 
-const playgroups = mongoose.model("playgroups", GroupNamesSchema);
+const Groupname = mongoose.model("Groupname", GroupNamesSchema);
 
-export default playgroups; 
+export default Groupname; 

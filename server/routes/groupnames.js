@@ -2,7 +2,7 @@ import express from "express";
 import { 
     postPlayGroup,
     getAllGroups,
- } from "../controllers/playgroup.js";
+ } from "../controllers/groupnames.js";
 
 const router = express.Router();
 

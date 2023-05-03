@@ -1,4 +1,4 @@
-import playgroups from "../models/Groupnames.js";
+import Groupname from "../models/Groupnames.js";
 import Users from "../models/User.js";
 import mongoose from "mongoose";
 
@@ -10,7 +10,7 @@ export const postPlayGroup = (req, res) => {
     const giftExchangeDate = req.body.giftExchangeDate;
     const createdBy = req.body.createdBy;
 
-    const newPlayGroup = new playgroups({
+    const newPlayGroup = new Groupname({
         organiserName,
         friendsName,
         budget,
@@ -26,7 +26,7 @@ export const postPlayGroup = (req, res) => {
 };
 
 export const getAllGroups = (req, res) => {
-    playgroups.find()
+    Groupname.find()
         .then((groups) => res.json(groups))
         .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -38,7 +38,7 @@ export const updatePlayGroup = (req, res) => {
     //         // group.friendsName = 
     //         { $push: { friendsName: } }
     //     })
-    playgroups.updateOne(
+    Groupname.updateOne(
         { $push: { friendsName: req.body.friendsName }}
     )
 }

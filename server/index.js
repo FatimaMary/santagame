@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import userRoutes from './routes/user.js';
-import playGroupRoutes from './routes/playgroup.js';
+import playGroupRoutes from './routes/groupnames.js';
 import groupPlayersRoutes from './routes/groupplayers.js';
 import wishlistRoutes from './routes/wishlist.js';
 import productRoutes from './routes/products.js';
@@ -24,7 +24,7 @@ app.use(cors());
 
 // ROUTES
 app.use("/user", userRoutes);
-app.use("/playgroup", playGroupRoutes);
+app.use("/group", playGroupRoutes);
 app.use("/groupplayers", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/products", productRoutes);
