@@ -132,14 +132,15 @@
   }
   
   .input-group > input,
-  .input-group > select {
+  .input-group > select,
+  .organiser > input {
     margin: 1rem 0;
     width: 40%;
     padding: 0.75rem;
     border: 1px solid #c2c2c2;
     border-radius: 0.25rem;
     text-align: left;
-    color: #e90d0d;
+    color: #111010;
     text-align: left;
   }
 

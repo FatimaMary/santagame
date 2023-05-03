@@ -17,12 +17,14 @@ import { useNavigate } from "react-router-dom";
 import MainValidation from '../../Components/MainValidation';
 import { getStyleValue } from "@mui/system";
 import { BiRupee } from "react-icons/bi";
+import axios from 'axios';
 
 
 export default function VerticalLinearStepper() {
   const [date, setDate] = useState();
   const [show, setShow] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
+  const [organiserName, setOrganiserName] = useState();
   const [names, setNames] = useState(["", "", "", ""]);
   const [errorArray, setErrorArray] = useState();
   const [value, setValue] = useState("");
@@ -85,22 +87,32 @@ export default function VerticalLinearStepper() {
     setValue("");
   };
 
-//   const navigate = useNavigate();
-//   const handleConfirm = () => {
-//     navigate("/Message");
-//   };
+  const navigate = useNavigate();
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:2318/group/add", {
+        
+      })
+    // navigate("/Message");
+  };
 
   const steps = [
     {
       label: <h1 className="text-center">Enter names</h1>,
       description: (
-        <div>
+        <div className="organiser">
           <h2 className="text-centerN">Your name</h2>
+          <input 
+            placeholder="Oraganiser Name"
+            value={organiserName}
+            onChange={(e) => setOrganiserName(e.target.value)}
+          />
           <div>
             {names.map((data, i) => {
               return (
                 <div>
-                  {i === 1 && <h2 className="text-centerN">Draw names with</h2>}
+                  {i === 0 && <h2 className="text-centerN">Draw names with</h2>}
                   {
                     <div className="input-group" >
                       <input
@@ -251,7 +263,7 @@ export default function VerticalLinearStepper() {
               Confirm the group and choose how to send the invitations.
             </p>
             <button className="mainitems-btn" 
-            // onClick={handleConfirm}
+            onClick={handleConfirm}
             >
               Confirm
             </button>

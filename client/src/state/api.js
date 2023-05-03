@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 export const api = createApi({
     baseQuery : fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
     reducerPath: "adminApi",
-    tagTypes: ["Users"],
+    tagTypes: ["Users", "playgroups"],
     endpoints: (build) => ({
         postUser: build.query({
             query: () => "user/add",
@@ -18,7 +18,14 @@ export const api = createApi({
             query: (id) => `user/${id}`,
             providesTags: ["Users"],
         }),
-
+        postPlayGroup: build.query({
+            query: () => "group/add",
+            providesTags: ["playgroups"]
+        }),
+        getAllGroups: build.query({
+            query: () => "group/all",
+            providesTags: ["playgroups"]
+        }),
     }),
 });
 

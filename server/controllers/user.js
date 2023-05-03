@@ -20,7 +20,7 @@ export const postUser = (req, res) => {
 
     newUser
         .save()
-        .then((data) => res.json("New User Added"))
+        .then((data) => res.json(data))
         .catch((err) => res.status(400).json("Error: " + err));
 };
 

@@ -1,5 +1,5 @@
-import playgroups from "../models/Groupnames";
-import Users from "../models/User";
+import playgroups from "../models/Groupnames.js";
+import Users from "../models/User.js";
 import mongoose from "mongoose";
 
 export const postPlayGroup = (req, res) => {
