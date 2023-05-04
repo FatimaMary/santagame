@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 export const postPlayGroup = (req, res) => {
     const organiserName = req.body.organiserName;
     const friendsName = req.body.friendsName;
+    const groupName = req.body.groupName;
     const budget = req.body.budget;
     const organiserEmail = req.body.organiserEmail;
     const giftExchangeDate = req.body.giftExchangeDate;
@@ -13,6 +14,7 @@ export const postPlayGroup = (req, res) => {
     const newPlayGroup = new Groupname({
         organiserName,
         friendsName,
+        groupName,
         budget,
         organiserEmail,
         giftExchangeDate,

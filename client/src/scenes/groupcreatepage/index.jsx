@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { Checkbox } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 // import MainValidation from "./MainValidation";
 import MainValidation from '../../Components/MainValidation';
 import { getStyleValue } from "@mui/system";
@@ -20,8 +20,8 @@ import { BiRupee } from "react-icons/bi";
 import axios from 'axios';
 
 
-export default function VerticalLinearStepper( { userId } ) {
-  const [date, setDate] = useState();
+export default function VerticalLinearStepper() {
+  const [giftExchangeDate, setGiftExchangeDate] = useState();
   const [show, setShow] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [organiserName, setOrganiserName] = useState();
@@ -29,9 +29,11 @@ export default function VerticalLinearStepper( { userId } ) {
   const [errorArray, setErrorArray] = useState();
   const [value, setValue] = useState("");
   const [isShown, setIsShown] = useState(false);
-  const [email, setEmail] = useState();
+  const [organiserEmail, setOrganiserEmail] = useState();
   const [groupName, setGroupName] = useState();
   const [budget, setBudget] = useState();
+  const [searchParam] = useSearchParams();
+  const createdBy = searchParam.get("userId");
 
   const amounts = [
     { value: " " , text: "Budget"},
@@ -105,7 +107,7 @@ export default function VerticalLinearStepper( { userId } ) {
 
   const clearDate = () => {
     alert("date clear button clicked");
-    setDate("");
+    setGiftExchangeDate("");
   };
 
   const clearTextArea = () => {
@@ -116,15 +118,18 @@ export default function VerticalLinearStepper( { userId } ) {
   const navigate = useNavigate();
   const handleConfirm = (e) => {
     e.preventDefault();
+    console.log("organiser name: ", organiserName);
+    console.log("group name: ", groupName);
+    console.log("user Id", createdBy);
     axios
       .post("http://localhost:2318/group/addgroup", {
         organiserName: organiserName,
-        friendesName: names,
+        friendsName: names,
         groupName: groupName,
         budget: budget,
-        date: date,
-        email: email,
-        userId: userId
+        giftExchangeDate: giftExchangeDate,
+        organiserEmail: organiserEmail,
+        createdBy: createdBy
       })
       .then((response) => {
         console.log("Post group response: " , response);
@@ -200,7 +205,7 @@ export default function VerticalLinearStepper( { userId } ) {
           <div className="input-group">
             <input
               type="text"
-              name="username"
+              name="groupname"
               id="username"
               placeholder="Enter a title for the gift exchange"
               value={groupName}
@@ -215,8 +220,8 @@ export default function VerticalLinearStepper( { userId } ) {
           <div className="input-group">
             <input
               type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              value={giftExchangeDate}
+              onChange={(e) => setGiftExchangeDate(e.target.value)}
               placeholder="Choose a date"
               onClick={() => setShow((show) => !show)}
             />
@@ -263,7 +268,13 @@ export default function VerticalLinearStepper( { userId } ) {
             </div>
             <h2 className="text-centerN">Your Email</h2>
             <div className="input-group" >
-              <input placeholder="Enter your email address" value={email} onChange={(e) => setEmail(e.target.value)}/>
+              <input 
+                placeholder="Enter your email address"
+                type='email'
+                name="email"
+                value={organiserEmail} 
+                onChange={(e) => setOrganiserEmail(e.target.value)}
+              />
             </div>
             <h2 className="text-centerN">Invitation message</h2>
             <div className="Para">

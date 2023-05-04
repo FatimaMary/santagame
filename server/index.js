@@ -25,7 +25,7 @@ app.use(cors());
 // ROUTES
 app.use("/user", userRoutes);
 app.use("/group", playGroupRoutes);
-app.use("/groupplayers", groupPlayersRoutes);
+app.use("/players", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/products", productRoutes);
 
