@@ -65,13 +65,12 @@ function CopyInvitation() {
                 variant='outlined'
                 sx={{ 
                     border: '1px solid red', 
-                    backgroundColor: 'red', 
+                    // backgroundColor: 'red', 
                     width: '200px',
                     borderRadius: '25px',
-                    color: 'green'
+                    color: 'black'
                 }}
                 // width='200px'
-                
             >
                 Copy Invitation
             </Button>

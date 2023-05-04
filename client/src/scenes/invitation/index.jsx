@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 
 function Invitation() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/copyinvitation")
+  }
+
   return (
     <Box 
       m='1.5rem 2.5rem'
@@ -25,9 +31,10 @@ function Invitation() {
         </Typography>
         <Box
           width='200px'
-          sx={{display: 'flex', justifyContent: 'space-around' }}
+          sx={{display: 'flex', justifyContent: 'space-around', cursor: 'pointer' }}
           fontSize='1.5rem'
           color='red'
+          onClick={handleClick}
         >
             <MdContentCopy/>
             <Typography 
