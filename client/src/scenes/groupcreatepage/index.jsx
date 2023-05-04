@@ -134,8 +134,9 @@ export default function VerticalLinearStepper() {
       .then((response) => {
         console.log("Post group response: " , response);
         console.log("New Group data: ", response.data);
+        navigate(`/Message?email=${organiserEmail}`);
       })
-    // navigate("/Message");
+    
   };
 
   const steps = [
