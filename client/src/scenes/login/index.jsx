@@ -9,15 +9,33 @@ import { auth } from '../../firebase';
 function Login() {
     const navigate = useNavigate();
     const [err, setErr] = useState(false);
-    const [email, setEmail] = useState();
+    // const [email, setEmail] = useState();
     const [name, setName] = useState();
-    const [password, setPassword] = useState();
+    // const [password, setPassword] = useState();
     const [errors, setErrors] = useState({});
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
+    const [loginData, setLoginData] = useState({
+        email: "",
+        password: "",
+    })
 
-    const handleSubmit =(e) => {
+    const handleChange = (e) => {
+        setLoginData({
+            ...loginData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleLogin =async(e) => {
         e.preventDefault();
-        // setErrors(validation(logi))
+        setErrors(validation(loginData));
+        setDataIsCorrect(true);
+        setErrors("");
+        signInWithEmailAndPassword(auth, loginData.email, loginData.password)
+            .then(async(res) => {
+                console.log(res);
+                navigate(`/groupcreate?userId=${res.user.uid}`)
+            })
         console.log("button clicked");
         alert("Form submitted");
     }
@@ -41,7 +59,7 @@ function Login() {
                 <Link to='/register'>Register Here </Link>)
             </Typography> */}
         </Box>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
             <Box
             sx={{ 
                 display: 'flex', 
@@ -50,7 +68,8 @@ function Login() {
             }}
             >
                 <TextField 
-                    id="outlined-basic" 
+                    id="outlined-basic-name" 
+                    name="name"
                     label="Name" 
                     variant="outlined" 
                     sx={{
@@ -62,7 +81,8 @@ function Login() {
                     onChange={(e) => setName(e.target.value)}
                 />
                 <TextField 
-                    id="outlined-basic" 
+                    id="outlined-basic-email"
+                    name='email' 
                     label="Email" 
                     variant="outlined" 
                     sx={{
@@ -70,11 +90,12 @@ function Login() {
                         width: '400px',
                         borderRadius: '10px',
                     }}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={loginData.email}
+                    onChange={handleChange}
                 />
                 <TextField 
-                    id='outlined-basic' 
+                    id='outlined-basic-password'
+                    name='password' 
                     label='Password' 
                     variant='outlined' 
                     sx={{
@@ -82,8 +103,8 @@ function Login() {
                         width: '400px',
                         borderRadius: '10px',
                     }}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={loginData.password}
+                    onChange={handleChange}
                 />
                 <Box 
                     sx={{
