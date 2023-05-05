@@ -27,11 +27,15 @@ font-family: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 body {
-  background-image:url(assets/Background1.jfif);
+  background-image:url(assets/Background6.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   /* position: relative; */
+  /* border: 30px solid transparent; */
+  /* height: 100vh; */
+  /* padding: 15px; */
+  /* border-image: url(assets/Background6.png) 50 round; */
 }
 
 .container{
@@ -47,7 +51,7 @@ body {
   width: 100%;
   height: 100px;
   padding: 30px;
-  background-color: #f194b9;
+  /* background-color: #f194b9; */
   display: flex;
   justify-content: space-between;
   align-items: center;

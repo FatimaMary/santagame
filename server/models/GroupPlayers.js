@@ -38,6 +38,6 @@ GroupPlayersSchema.plugin(autoIncrement.plugin, {
     incrementBy: 1,
 });
 
-const groupPlayer = mongoose.model("groupPlayer", GroupPlayersSchema);
+const GroupPlayer = mongoose.model("groupPlayer", GroupPlayersSchema);
 
-export default groupPlayer;
+export default GroupPlayer;
