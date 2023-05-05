@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // ROUTES
-app.use("/user", userRoutes);
+app.use("/giftuser", userRoutes);
 app.use("/group", playGroupRoutes);
 app.use("/players", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);

@@ -7,15 +7,15 @@ export const api = createApi({
     tagTypes: ["Users", "Groupname"],
     endpoints: (build) => ({
         postUser: build.query({
-            query: () => "user/add",
+            query: () => "giftuser/add",
             providesTags: ["Users"],
         }),
         getUser: build.query({
-            query: () => "user/all",
+            query: () => "giftuser/all",
             providesTags: ["Users"],
         }),
         getSingleUser: build.query({
-            query: (id) => `user/${id}`,
+            query: (id) => `giftuser/${id}`,
             providesTags: ["Users"],
         }),
         postPlayGroup: build.query({
