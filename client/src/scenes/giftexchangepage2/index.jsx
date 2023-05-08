@@ -71,9 +71,10 @@ function GiftExchangePage2() {
                 label="Email" 
                 variant="outlined" 
                 sx={{
-                    // margin: '1rem',
+                    marginBottom: '1rem',
                     width: '300px',
                     borderRadius: '10px',
+                    // height: '200px'
                 }}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +98,13 @@ function GiftExchangePage2() {
           </Box>
        </Box>
        )}
-       <Button>Join the Group</Button>
+       <Button 
+          variant='outlined'
+          // color='red'
+          sx={{ color: 'red', width:'175px', borderRadius: '25px', border: '1px solid red'}}
+       >
+          Join the Group
+        </Button>
     </Box>
   )
 }

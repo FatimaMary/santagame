@@ -8,7 +8,7 @@ function GiftExchangePage4() {
   return (
     <Box>
       <Typography>
-          Product
+          Group Name
       </Typography>
       <Box>
         <TiTick/>
