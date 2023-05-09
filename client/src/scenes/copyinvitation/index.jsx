@@ -60,24 +60,9 @@ function CopyInvitation() {
         //   onChange={(e) => setCopyText(e.target.value)}
           inputRef={textFieldRef}
           defaultValue={`We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift.
+          
           Click on the link to draw the name 
           http://localhost:3000/giftexchange1`}
-        // defaultValue={
-        //     <>
-        //       We're going to draw names! Make a wish list and draw a name so that
-        //       everyone has time to by a gift.
-        //       <br />
-        //       <br />
-        //       Click on the link to draw the name{" "}
-        //       <Link
-        //         component={RouterLink}
-        //         to="/giftexchange1"
-        //         sx={{ cursor: "pointer", color: "blue" }}
-        //       >
-        //         http://localhost:3000/giftexchange1
-        //       </Link>
-        //     </>
-        //   }
         />
         <Box
          sx={{display: 'flex', justifyContent: 'center'}}
