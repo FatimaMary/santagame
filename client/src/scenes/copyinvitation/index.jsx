@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Typography, Button, TextField } from '@mui/material';
 import copy from 'copy-to-clipboard';
 
 function CopyInvitation() {
-    const [copyText, setCopyText] = useState("We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift.");
+    const [copyText, setCopyText] = useState("");
+    const textFieldRef = useRef(null);
 
     const copyToClipboard = () => {
-        copy(copyText);
-        alert(`You have copied "${copyText}"`);
+        copy(textFieldRef.current.defaultValue);
+        setCopyText(textFieldRef.current.defaultValue)
+        alert(`You have copied "${textFieldRef.current.defaultValue}"`);
     }
   return (
     <Box 
@@ -53,8 +55,14 @@ function CopyInvitation() {
           multiline
           rows={5}
           value={copyText}
-            onChange={(e) => setCopyText(e.target.value)}
-        //   defaultValue="Default Value"
+          onChange={(e) => setCopyText(e.target.value)}
+          inputRef={textFieldRef}
+          defaultValue="We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift. 
+
+
+          
+          Click on the link to draw the name 
+          http://localhost:3000/giftexchange1"
         />
         {/* </Typography> */}
         <Box

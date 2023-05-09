@@ -4,9 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 
 function MessageToOrganiser() {
     const [searchParam] = useSearchParams();
-  const email = searchParam.get("email");
+    const email = searchParam.get("email");
 
-//   console.log("email: ", email);
   return (
     <Box
       m='1.5rem 2.5rem'

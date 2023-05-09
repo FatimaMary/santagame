@@ -1,9 +1,10 @@
 import React, {useState } from 'react';
 import { Box, Typography, Select, MenuItem, TextField, Button, InputLabel } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
+import axios from 'axios';
 
 function GiftExchangePage2() {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ function GiftExchangePage2() {
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
   const [playerName, setPlayerName] = useState();
+  const [searchParam] = useSearchParams();
+  const playerId = searchParam.get("playerId");
+
 
   const names = [
    'Organiser', 
@@ -22,6 +26,19 @@ function GiftExchangePage2() {
     'member3',
     'member4'
   ]
+
+    const handleClick = (e) => {
+      e.preventDefault();
+      axios.put(`http://localhost:2318/players/update/${playerId}`, {
+        playerName: playerName,
+        playerEmail: email,
+      })
+      .then((response) => {
+        console.log("update response: ",response);
+        console.log("update data: ",response.data);
+        navigate(`/giftexchange3?email=${email}`);
+      })
+    }
   return (
     <Box 
       m='1.5rem 2.5rem'
@@ -102,6 +119,7 @@ function GiftExchangePage2() {
           variant='outlined'
           // color='red'
           sx={{ color: 'red', width:'175px', borderRadius: '25px', border: '1px solid red'}}
+          onClick={handleClick}
        >
           Join the Group
         </Button>

@@ -11,23 +11,23 @@ const GroupPlayersSchema = new mongoose.Schema({
     },
     invitationAccepted: {
         type: Boolean,
-        required: true
+        // required: true
     },
     playerName: {
         type: String,
-        required: true
+        // required: true
     },
     playerEmail: {
         type: String,
-        required: true
+        // required: true
     },
     groupId: {
         type: Number,
-        required: true
+        // required: true
     },
     userId: {
         type: String,
-        required: true
+        // required: true
     }
 });
 

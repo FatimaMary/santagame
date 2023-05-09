@@ -1,14 +1,20 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-// import GiftExchangePage2 from './giftexchange2';
 import { useNavigate } from 'react-router-dom';
 import { BiRupee } from "react-icons/bi";
+import axios from 'axios';
 
 function GiftExchangePage1() {
     const navigate = useNavigate();
 
     function moveToNextPage() {
-        navigate("/giftexchange2")
+      axios .post("http://localhost:2318/players/add", {
+        invitationAccepted: 'true'
+      }).then ((response) => {
+        console.log("player acceptance",response);
+        console.log("player data", response.data);
+        navigate(`/giftexchange2?playerId=${response.data.playerId}`);
+      })
     }
   return (
     <Box 

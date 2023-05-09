@@ -34,6 +34,10 @@ export const api = createApi({
             query: () => "players/all",
             providesTags: ["GroupPlayer"],
         }),
+        updateGroupPlayer: build.query({
+            query: (id) => `players/update/${id}`,
+            providesTags: ["GroupPlayer"],
+        }),
     }),
 });
 
@@ -45,4 +49,5 @@ export const {
     useGetAllGroupsQuery,
     useGetAllGroupPlayersQuery,
     usePostGroupPlayerQuery,
+    useUpdateGroupPlayerQuery
 } = api;
