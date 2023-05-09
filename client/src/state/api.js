@@ -38,6 +38,10 @@ export const api = createApi({
             query: (id) => `players/update/${id}`,
             providesTags: ["GroupPlayer"],
         }),
+        getAllPlayersById: build.query({
+            query: (id) => `players/get/${id}`,
+            providesTags: ["GroupPlayer"],
+        }),
     }),
 });
 
@@ -49,5 +53,6 @@ export const {
     useGetAllGroupsQuery,
     useGetAllGroupPlayersQuery,
     usePostGroupPlayerQuery,
-    useUpdateGroupPlayerQuery
+    useUpdateGroupPlayerQuery,
+    useGetAllPlayersByIdQuery,
 } = api;

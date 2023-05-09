@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Box, Typography, Button, TextField } from '@mui/material';
 import copy from 'copy-to-clipboard';
+import { Link, Link as RouterLink } from "react-router-dom";
+
 
 function CopyInvitation() {
     const [copyText, setCopyText] = useState("");
@@ -54,17 +56,29 @@ function CopyInvitation() {
           id="outlined-multiline-static"
           multiline
           rows={5}
-          value={copyText}
-          onChange={(e) => setCopyText(e.target.value)}
+        //   value={copyText}
+        //   onChange={(e) => setCopyText(e.target.value)}
           inputRef={textFieldRef}
-          defaultValue="We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift. 
-
-
-          
+          defaultValue={`We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift.
           Click on the link to draw the name 
-          http://localhost:3000/giftexchange1"
+          http://localhost:3000/giftexchange1`}
+        // defaultValue={
+        //     <>
+        //       We're going to draw names! Make a wish list and draw a name so that
+        //       everyone has time to by a gift.
+        //       <br />
+        //       <br />
+        //       Click on the link to draw the name{" "}
+        //       <Link
+        //         component={RouterLink}
+        //         to="/giftexchange1"
+        //         sx={{ cursor: "pointer", color: "blue" }}
+        //       >
+        //         http://localhost:3000/giftexchange1
+        //       </Link>
+        //     </>
+        //   }
         />
-        {/* </Typography> */}
         <Box
          sx={{display: 'flex', justifyContent: 'center'}}
         >

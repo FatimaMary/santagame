@@ -27,25 +27,17 @@ export const getAllGroupPlayers = (req, res) => {
         .catch((err) => res.status(400).json("Error: ", err));
 }
 
+
 export const updateGroupPlayer = (req, res) => {
     const playerId = req.params.playerId;
-        GroupPlayer.findOne({ playerId })
-            .then((player) => {
-                player.playerName = req.body.playerName;
-                player.playerEmail = req.body.playerEmail;
-                player
-                    .save()
-                    .then((data) => res.json(data))
-                    .catch((err) => res.status(400).json("Error: ", err));
-            })
-            .catch((err) => res.status(400).json("Error: ", err));
-}
+    GroupPlayer.updateOne({ playerId: playerId }, { playerName: req.body.playerName, playerEmail: req.body.playerEmail })
+      .then((data) => res.json(data))
+      .catch((err) => res.status(400).json({ error: err }));
+  }
 
-// export const updateGroupPlayer = (req, res) => {
-//     const playerId = req.params.playerId;
-//     GroupPlayer.updateOne({ playerId: playerId }, { playerName: req.body.playerName, playerEmail: req.body.playerEmail })
-//       .then(() => res.json({ message: 'Player updated successfully' }))
-//       .catch((err) => res.status(400).json({ error: err }));
-//   }
-
-
+  export const getAllPlayersById = (req, res) => {
+    const groupId = req.params.groupId;
+    GroupPlayer.find({ groupId })
+      .then((players) => res.json(players))
+      .catch((err) => res.status(400).json({ message: err.message }));
+  }
