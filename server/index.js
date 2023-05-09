@@ -10,7 +10,6 @@ import playGroupRoutes from './routes/groupnames.js';
 import groupPlayersRoutes from './routes/groupplayers.js';
 import wishlistRoutes from './routes/wishlist.js';
 import productRoutes from './routes/products.js';
-import friendRoutes from './routes/friend.js';
 
 // CONFIGURATION
 dotenv.config();
@@ -29,7 +28,6 @@ app.use("/group", playGroupRoutes);
 app.use("/players", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/products", productRoutes);
-app.use("/friend", friendRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
