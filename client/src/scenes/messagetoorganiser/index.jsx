@@ -5,6 +5,9 @@ import { useSearchParams } from 'react-router-dom';
 function MessageToOrganiser() {
     const [searchParam] = useSearchParams();
     const email = searchParam.get("email");
+    // const groupId = searchParam.get("groupId");
+
+    // console.log("group Id: ", groupId);
 
   return (
     <Box

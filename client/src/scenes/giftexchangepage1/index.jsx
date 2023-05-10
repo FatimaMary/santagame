@@ -1,15 +1,18 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiRupee } from "react-icons/bi";
 import axios from 'axios';
 
 function GiftExchangePage1() {
     const navigate = useNavigate();
+    const [searchParam] = useSearchParams();
+    const groupId = searchParam.get("groupId");
 
     function moveToNextPage() {
       axios .post("http://localhost:2318/players/add", {
-        invitationAccepted: 'true'
+        invitationAccepted: 'true',
+        groupId: groupId,
       }).then ((response) => {
         console.log("player acceptance",response);
         console.log("player data", response.data);

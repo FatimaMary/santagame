@@ -12,6 +12,6 @@ const router = express.Router();
 router.post("/add", postGroupPlayer);
 router.get("/all", getAllGroupPlayers);
 router.put("/update/:id", updateGroupPlayer);
-router.get("/get/:groupId", getAllGroupPlayers);
+router.get("/get/:id", getAllPlayersById);
 
 export default router;

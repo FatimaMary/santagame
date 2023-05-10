@@ -23,7 +23,7 @@ const GroupPlayersSchema = new mongoose.Schema({
     },
     groupId: {
         type: Number,
-        // required: true
+        required: true
     },
     userId: {
         type: String,

@@ -134,6 +134,7 @@ export default function VerticalLinearStepper() {
       .then((response) => {
         console.log("Post group response: " , response);
         console.log("New Group data: ", response.data);
+        localStorage.setItem("groupId ", response.data.groupId);
         navigate(`/Message?email=${organiserEmail}`);
       })
     

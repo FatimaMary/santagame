@@ -7,7 +7,8 @@ import { Link, Link as RouterLink } from "react-router-dom";
 function CopyInvitation() {
     const [copyText, setCopyText] = useState("");
     const textFieldRef = useRef(null);
-
+    const groupId = localStorage.getItem('groupId ');
+    console.log("groupId: ", groupId);
     const copyToClipboard = () => {
         copy(textFieldRef.current.defaultValue);
         setCopyText(textFieldRef.current.defaultValue)
@@ -62,7 +63,7 @@ function CopyInvitation() {
           defaultValue={`We're going to draw names! Make a wish list and draw a name so that everyone has time to by a gift.
           
           Click on the link to draw the name 
-          http://localhost:3000/giftexchange1`}
+          http://localhost:3000/giftexchange1?groupId=${groupId}`}
         />
         <Box
          sx={{display: 'flex', justifyContent: 'center'}}
