@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import userRoutes from './routes/user.js';
-import playGroupRoutes from './routes/groupnames.js';
+import playGroupRoutes from './routes/playgroup.js';
 import groupPlayersRoutes from './routes/groupplayers.js';
 import wishlistRoutes from './routes/wishlist.js';
 import productRoutes from './routes/products.js';

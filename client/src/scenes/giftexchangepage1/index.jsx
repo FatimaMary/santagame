@@ -16,7 +16,7 @@ function GiftExchangePage1() {
       }).then ((response) => {
         console.log("player acceptance",response);
         console.log("player data", response.data);
-        navigate(`/giftexchange2?playerId=${response.data.playerId}`);
+        navigate(`/giftexchange2?playerId=${response.data.playerId}&groupId=${groupId}`);
       })
     }
   return (

@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Box, Typography, Select, MenuItem, TextField, Button, InputLabel } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -17,6 +17,7 @@ function GiftExchangePage2() {
   const [playerName, setPlayerName] = useState();
   const [searchParam] = useSearchParams();
   const playerId = searchParam.get("playerId");
+  const groupId = searchParam.get("groupId");
 
 
   const names = [
@@ -27,9 +28,15 @@ function GiftExchangePage2() {
     'member4'
   ]
 
+  // useEffect(() => {
+  //   axios.get("")
+  // }, []);
+  
+
     const handleClick = (e) => {
       e.preventDefault();
       axios.put(`http://localhost:2318/players/update/${playerId}`, {
+        groupId: groupId,
         playerName: playerName,
         playerEmail: email,
       })

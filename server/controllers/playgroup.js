@@ -1,4 +1,4 @@
-import Groupname from "../models/Groupnames.js";
+import PlayGroup from "../models/PlayGroups.js";
 
 
 export const postPlayGroup = (req, res) => {
@@ -10,7 +10,7 @@ export const postPlayGroup = (req, res) => {
     const giftExchangeDate = req.body.giftExchangeDate;
     const createdBy = req.body.createdBy;
 
-    const newPlayGroup = new Groupname({
+    const newPlayGroup = new PlayGroup({
         organiserName,
         friendsName,
         groupName,
@@ -28,7 +28,7 @@ export const postPlayGroup = (req, res) => {
 
 
 export const getAllGroups = (req, res) => {
-    Groupname.find()
+    PlayGroup.find()
         .then((groups) => res.json(groups))
         .catch((err) => res.status(400).json("Error: " + err));
 };
@@ -40,7 +40,21 @@ export const updatePlayGroup = (req, res) => {
     //         // group.friendsName = 
     //         { $push: { friendsName: } }
     //     })
-    Groupname.updateOne(
+    PlayGroup.updateOne(
         { $push: { friendsName: req.body.friendsName }}
     )
-}
+};
+
+export const getGroupById = (req, res) => {
+    const groupId = req.params.groupId;
+    PlayGroup.findOne({ groupId: {groupId} })
+      .then((group) => {
+        if (!group) {
+          res.status(404).json({ message: 'Group not found' });
+        } else {
+          res.json(group);
+        }
+      })
+      .catch((err) => res.status(400).json({ message: err.message }));
+  };
+  
