@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/addgroup", postPlayGroup);
 router.get("/all", getAllGroups);
-router.get("/single/:id", getGroupById);
+router.get("/single/:groupId", getGroupById);
 
 export default router;

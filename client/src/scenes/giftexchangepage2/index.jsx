@@ -28,9 +28,12 @@ function GiftExchangePage2() {
     'member4'
   ]
 
-  // useEffect(() => {
-  //   axios.get("")
-  // }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:2318/group/single/${groupId}`)
+      .then(res => {
+        
+      })
+  }, []);
   
 
     const handleClick = (e) => {
