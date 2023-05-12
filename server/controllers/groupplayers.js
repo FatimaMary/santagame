@@ -27,46 +27,26 @@ export const getAllGroupPlayers = (req, res) => {
         .catch((err) => res.status(400).json({ error: err.message }));
 }
 
-
-// export const updateGroupPlayer = (req, res) => {
-//     const playerId = req.params.playerId;
-//     GroupPlayer.updateOne({ playerId: playerId }, { playerName: req.body.playerName, playerEmail: req.body.playerEmail })
-//       .then((data) => res.json(data))
-//       .catch((err) => res.status(400).json({ error: err }));
-//   }
-
+  
 export const updateGroupPlayer = (req, res) => {
-    const playerId = req.params.playerId;
-    GroupPlayer.findOne({ playerId: playerId })
-      .then((player) => {
-        player.playerName = req.body.playerName;
-        player.playerEmail = req.body.playerEmail;
-
-        player
-            .save()
-            .then(() => res.json("Player Updated"))
-            .catch((err) => res.status(400).json("Error: " + err));
-      })
-      .catch((err) => res.status(400).json({ error: err }));
-  }
-  
-// export const updateGroupPlayer = async (req, res) => {
-//     try {
-//       const playerId = req.params.playerId;
-//       const player = await GroupPlayer.findByIdAndUpdate(playerId, { playerName: req.body.playerName, playerEmail: req.body.playerEmail });
-//       if (!player) {
-//         return res.status(404).json({ message: 'Player not found' });
-//       }
-//       return res.json("Player updated");
-//     } catch (err) {
-//       return res.status(400).json({ error: err });
-//     }
-//   }
-  
+  const playerId = req.params.playerId;
+  GroupPlayer.updateOne({ playerId: playerId }, { $set: {
+    playerName: req.body.playerName,
+    playerEmail: req.body.playerEmail
+  }})
+  .then(() => res.json("Player Updated"))
+  .catch((err) => res.status(400).json({ error: err }));
+}
 
   export const getAllPlayersById = (req, res) => {
     const groupId = req.params.groupId;
-    GroupPlayer.find({ groupId })
-      .then((players) => res.json(players))
-      .catch((err) => res.status(400).json({ message: err.message }));
+    GroupPlayer.find({ groupId: groupId })
+    .then((player) => {
+      if (!player) {
+        res.status(404).json({ message: 'Players not found' });
+      } else {
+        res.json(player);
+      }
+    })
+    .catch((err) => res.status(400).json({ message: err.message }));
   }

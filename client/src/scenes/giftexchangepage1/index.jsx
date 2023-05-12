@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiRupee } from "react-icons/bi";
@@ -8,6 +8,16 @@ function GiftExchangePage1() {
     const navigate = useNavigate();
     const [searchParam] = useSearchParams();
     const groupId = searchParam.get("groupId");
+    // const [names, setNames] = useState([]);
+    const [groupData, setgroupData] = useState([])
+
+    useEffect(() => {
+      axios.get(`http://localhost:2318/group/single/${groupId}`)
+        .then(res => {
+          console.log("response" , res);
+          setgroupData(res.data);
+        })
+    }, []);
 
     function moveToNextPage() {
       axios .post("http://localhost:2318/players/add", {
@@ -37,24 +47,24 @@ function GiftExchangePage1() {
         </Typography>
         <Typography
           variant='body1'
-          fontWeight='bold'
+          // fontWeight='bold'
         >
-          User invites to draw names for groupname with user, member1, member2, member3
+          {groupData.organiserName} invites to draw names for <b>{groupData.groupName}</b> with {groupData.organiserName}, {groupData.friendsName[0]}, {groupData.friendsName[1]}, {groupData.friendsName[2]}, {groupData.friendsName[3]}
         </Typography>
         <Box 
           display='flex'
           flexDirection='column'
           gap={2}
         >
-            <Typography>Date of gift exchange: Date</Typography>
-            <Typography>Budget: <BiRupee/>Amount</Typography>
+            <Typography>Date of gift exchange: {groupData.giftExchangeDate},</Typography>
+            <Typography>Budget: <BiRupee/>{groupData.budget},</Typography>
         </Box>
         <Box
           display='flex'
           flexDirection='column'
           gap={2}
         >
-          <Typography>Message from Organiser Name</Typography>
+          <Typography fontWeight='bold'>Message from {groupData.organiserName}</Typography>
           <Typography
             variant='body1'
             fontStyle='italic'

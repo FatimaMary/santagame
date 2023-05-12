@@ -8,47 +8,46 @@ import axios from 'axios';
 
 function GiftExchangePage2() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
+  const [playerEmail, setPlayerEmail] = useState("");
   const [error, setError] = useState({});
   const [isEmail, setIsEmail] = useState(false);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
-  const [playerName, setPlayerName] = useState();
+  const [playerName, setPlayerName] = useState("");
   const [searchParam] = useSearchParams();
   const playerId = searchParam.get("playerId");
   const groupId = searchParam.get("groupId");
+  const [names, setNames] = useState([])
 
-
-  const names = [
-   'Organiser', 
-    'member1',
-    'member2',
-    'member3',
-    'member4'
-  ]
+  
 
   useEffect(() => {
     axios.get(`http://localhost:2318/group/single/${groupId}`)
       .then(res => {
-        
+        console.log("response" , res);
+        setNames(res.data.friendsName);
       })
   }, []);
   
 
     const handleClick = (e) => {
       e.preventDefault();
+      console.log("player name: ",  playerName);
+      console.log("player email: ", playerEmail);
       axios.put(`http://localhost:2318/players/update/${playerId}`, {
-        groupId: groupId,
+        // groupId: groupId,
         playerName: playerName,
-        playerEmail: email,
+        playerEmail: playerEmail,
       })
       .then((response) => {
         console.log("update response: ",response);
         console.log("update data: ",response.data);
-        navigate(`/giftexchange3?email=${email}`);
+        navigate(`/giftexchange3?email=${playerEmail}`);
       })
     }
+    // console.log("player name: ",  playerName);
+
   return (
     <Box 
       m='1.5rem 2.5rem'
@@ -103,8 +102,8 @@ function GiftExchangePage2() {
                     borderRadius: '10px',
                     // height: '200px'
                 }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={playerEmail}
+                onChange={(e) => setPlayerEmail(e.target.value)}
         />
           <Box>
             <Typography>--------- or confirm with just one Click ---------</Typography>

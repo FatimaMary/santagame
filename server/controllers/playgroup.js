@@ -47,7 +47,6 @@ export const updatePlayGroup = (req, res) => {
 
 export const getGroupById = (req, res) => {
     const groupId = Number(req.params.groupId);
-    // const myObject = new Number(groupId);
     PlayGroup.findOne({ groupId: groupId })
       .then((group) => {
         if (!group) {
@@ -58,18 +57,3 @@ export const getGroupById = (req, res) => {
       })
       .catch((err) => res.status(400).json({ message: err.message }));
   };
-
-  
-// export const getGroupById = async (req, res) => {
-//   const groupId = req.params.groupId;
-//   try {
-//     const group = await PlayGroup.findOne({ groupId });
-//     if (!group) {
-//       res.status(404).json({ message: 'Group not found' });
-//     } else {
-//       res.json(group);
-//     }
-//   } catch (err) {
-//     res.status(400).json({ message: err.message });
-//   }
-// };
