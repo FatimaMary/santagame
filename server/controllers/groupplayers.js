@@ -31,11 +31,15 @@ export const getAllGroupPlayers = (req, res) => {
 
   
 export const updateGroupPlayer = (req, res) => {
-  const playerId = req.params.playerId;
+  const playerId = Number(req.params.playerId);
+  
+  console.log("Player Id: " , playerId);
+  console.log("Request body: " , req.body);
   GroupPlayer.updateOne({ playerId: playerId }, { $set: {
     playerName: req.body.playerName,
-    playerEmail: req.body.playerEmail
+    playerEmail: req.body.playerEmail,
   }})
+
   .then((data) => res.json(data))
   .catch((err) => res.status(400).json({ error: err }));
 }
@@ -67,7 +71,7 @@ export const updateGroupPlayer = (req, res) => {
       .catch((err) => res.status(400).json({ message: err.message }));
   }
 
-  // export const getGroupsByEmail = (req, res) => {
+  // export const getGroupsNameByEmail = (req, res) => {
   //   const email = req.body.email;
   //   GroupPlayer.find({ playerEmail: email })
   //     .then((player) => {
@@ -80,3 +84,18 @@ export const updateGroupPlayer = (req, res) => {
   //     })
   //     .catch((err) => res.status(400).json({ message: err.message }));
   // }
+
+  export const getGroupsNameByEmail = (req, res) => {
+    const email = req.body.email;
+    GroupPlayer.find({ playerEmail: email })
+      .then((players) => {
+        if (players.length === 0) {
+          res.status(404).json({ message: 'you are not in any group' });
+        } else {
+          const groupNames = players.map(player => player.groupName); 
+          res.json(groupNames);
+        }
+      })
+      .catch((err) => res.status(400).json({ message: err.message }));
+  }
+  

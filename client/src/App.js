@@ -12,6 +12,7 @@ import GiftExchangePage2 from './scenes/giftexchangepage2';
 import GiftExchangePage3 from './scenes/giftexchangepage3';
 import GiftExchangePage4 from './scenes/giftexchangepage4';
 import GiftFinder from './scenes/giftfinder';
+import Dashboard from './scenes/dashboard';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='giftexchange3' element={<GiftExchangePage3/>}/>
           <Route path='giftexchange4' element={<GiftExchangePage4/>}/>
           <Route path='giftfinder' element={<GiftFinder/>} />
+          <Route path='dashboard' element={<Dashboard/>} />
         </Routes>
       </BrowserRouter>
     </div>

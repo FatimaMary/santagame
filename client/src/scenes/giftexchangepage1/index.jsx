@@ -12,9 +12,10 @@ function GiftExchangePage1() {
     const [groupData, setgroupData] = useState([])
 
     useEffect(() => {
+      console.log("Page loading...")
       axios.get(`http://localhost:2318/group/single/${groupId}`)
         .then(res => {
-          console.log("response" , res);
+          console.log("response" , res.data);
           setgroupData(res.data);
         })
     }, []);
@@ -52,7 +53,8 @@ function GiftExchangePage1() {
           variant='body1'
           // fontWeight='bold'
         >
-          {groupData.organiserName} invites to draw names for <b>{groupData.groupName}</b> with {groupData.organiserName}, {groupData.friendsName[0]}, {groupData.friendsName[1]}, {groupData.friendsName[2]}, {groupData.friendsName[3]}
+          {groupData.organiserName} invites to draw names for <b>{groupData.groupName}</b> with {groupData.organiserName}
+         
         </Typography>
         <Box 
           display='flex'
