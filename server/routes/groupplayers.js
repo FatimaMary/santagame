@@ -4,6 +4,7 @@ import {
     getAllGroupPlayers,
     updateGroupPlayer,
     getAllPlayersById,
+    getGroupsByEmail,
 } from "../controllers/groupplayers.js";
 
 
@@ -13,5 +14,6 @@ router.post("/add", postGroupPlayer);
 router.get("/all", getAllGroupPlayers);
 router.put("/update/:id", updateGroupPlayer);
 router.get("/get/:id", getAllPlayersById);
+router.get("/groups", getGroupsByEmail );
 
 export default router;

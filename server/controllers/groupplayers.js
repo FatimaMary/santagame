@@ -2,8 +2,9 @@ import GroupPlayer from "../models/GroupPlayers.js";
 
 export const postGroupPlayer = (req, res) => {
     const invitationAccepted = req.body.invitationAccepted;
-    const playerName = "";
-    const playerEmail = "";
+    const playerName = req.body.playerName;
+    const playerEmail = req.body.playerEmail;
+    const groupName = req.body.groupName;
     const groupId = req.body.groupId;
     // const userId = req.body.userId;
 
@@ -11,6 +12,7 @@ export const postGroupPlayer = (req, res) => {
         invitationAccepted,
         playerName,
         playerEmail,
+        groupName,
         groupId,
         // userId
     });
@@ -34,7 +36,7 @@ export const updateGroupPlayer = (req, res) => {
     playerName: req.body.playerName,
     playerEmail: req.body.playerEmail
   }})
-  .then(() => res.json("Player Updated"))
+  .then((data) => res.json(data))
   .catch((err) => res.status(400).json({ error: err }));
 }
 
@@ -50,3 +52,31 @@ export const updateGroupPlayer = (req, res) => {
     })
     .catch((err) => res.status(400).json({ message: err.message }));
   }
+
+  
+  export const getGroupsByEmail = (req, res) => {
+    const email = req.body.email;
+    GroupPlayer.find({ playerEmail: email })
+      .then((player) => {
+        if(!player) {
+          res.status(404).json({ message: 'you are not in any group' });
+        } else {
+          res.json(player);
+        }
+      })
+      .catch((err) => res.status(400).json({ message: err.message }));
+  }
+
+  // export const getGroupsByEmail = (req, res) => {
+  //   const email = req.body.email;
+  //   GroupPlayer.find({ playerEmail: email })
+  //     .then((player) => {
+  //       if (!player) {
+  //         res.status(404).json({ message: 'you are not in any group' });
+  //       } else {
+  //         const groupName = player[0].groupName; 
+  //         res.json(groupName);
+  //       }
+  //     })
+  //     .catch((err) => res.status(400).json({ message: err.message }));
+  // }

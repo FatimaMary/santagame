@@ -21,6 +21,9 @@ const GroupPlayersSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    groupName: {
+        type: String,
+    },
     groupId: {
         type: Number,
         required: true
