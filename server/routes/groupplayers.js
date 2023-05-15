@@ -20,6 +20,6 @@ router.get("/get/:groupId", getAllPlayersById);
 router.get("/groups", getGroupsByEmail );
 router.get("/email", getGroupsNameByEmail);
 router.get("/groupname", getIdsByGroupname);
-router.get("/details", getFullDetailsByEmail)
+router.get("/details/:email", getFullDetailsByEmail)
 
 export default router;

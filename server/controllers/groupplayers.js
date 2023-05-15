@@ -88,7 +88,8 @@ export const updateGroupPlayer = (req, res) => {
   }
   
   export const getFullDetailsByEmail = (req, res) => {
-    const email = req.body.email;
+    const email = req.params.email;
+    console.log("email: ", email)
     GroupPlayer.find({ playerEmail: email })
       .then((players) => {
         if (players.length === 0) {

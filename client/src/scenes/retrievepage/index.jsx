@@ -8,13 +8,15 @@ import {
     Button
 } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function RetrievePage() {
     const [email, setEmail] = useState();
+    const navigate = useNavigate();
 
     function handleSend(e) {
         e.preventDefault();
-        setEmail(email);
+        navigate(`/dashboard?email=${email}`)
     }
     
   return (

@@ -8,83 +8,30 @@ import {
     Button
 } from '@mui/material';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 function Dashboard() {
     const [dashboardData, setDashboardData] = useState([]);
-    const [show, setShow] = useState(false);
-    const [email, setEmail] = useState();
+    const [searchParam] = useSearchParams();
+    const email = searchParam.get["email"];
 
-    function handleSend(e) {
-        e.preventDefault();
-        setShow(!show);
-        setEmail(email);
-    }
-
-    useEffect(() => {
-        axios.get("http://localhost:2318/players/groups")
+    // useEffect(() => {
+        axios.get(`http://localhost:2318/players/groups/${email}`)
             .then((response) => {
                 console.log("dashboard response: " , response);
                 setDashboardData(response.data);
             })
-    }, [email]);
+    // }, []);
     
   return (
    <Box 
     m='1.5rem 2.5rem'
     width={500}
    >
-        <Box 
-            sx={{ 
-                display: 'flex', 
-                flexDirection: 'column',
-                gap: '15px',
-            }}
-        >
-            <Box
-                sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    gap: '10px',
-                }}
-            >
-                <Typography
-                    variant='h4'
-                    // fontSize={}
-                >
-                    My Group Page
-                </Typography>
-                <Typography>View your wish list and your drawn name on the group page.</Typography>
-                <Typography>Enter your email address and we will resend it. You can also create an account for easy access.</Typography>
-            </Box>
-            <Box>
-                <Typography>Your email</Typography>
-                <TextField
-                    placeholder='Enter Your Email'
-                    sx={{
-                        width: '300px',
-                    }}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </Box>
-            <Box ml={6}
-            >
-                <Button 
-                    variant='contained'
-                    sx={{ 
-                        width: '100px',
-                        borderRadius: '20px'
-                    }}
-                    onClick={handleSend}
-                >
-                    Send
-                </Button>
-            </Box>
-        </Box>
-       {show ? <div><Typography>My Group Page</Typography>
+        <Typography>My Group Page</Typography>
         <CardContent>
             <Typography>{dashboardData.groupName}</Typography>
-        </CardContent> </div> : null}
+        </CardContent> 
    </Box>
   )
 }
