@@ -6,6 +6,8 @@ import {
     getAllPlayersById,
     getGroupsByEmail,
     getGroupsNameByEmail,
+    getIdsByGroupname,
+    getFullDetailsByEmail,
 } from "../controllers/groupplayers.js";
 
 
@@ -16,6 +18,8 @@ router.get("/all", getAllGroupPlayers);
 router.put("/update/:playerId", updateGroupPlayer);
 router.get("/get/:groupId", getAllPlayersById);
 router.get("/groups", getGroupsByEmail );
-router.get("/groupname", getGroupsNameByEmail);
+router.get("/email", getGroupsNameByEmail);
+router.get("/groupname", getIdsByGroupname);
+router.get("/details", getFullDetailsByEmail)
 
 export default router;

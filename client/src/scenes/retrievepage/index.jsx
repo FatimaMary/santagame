@@ -9,36 +9,23 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 
-function Dashboard() {
-    const [dashboardData, setDashboardData] = useState([]);
-    const [show, setShow] = useState(false);
+function RetrievePage() {
     const [email, setEmail] = useState();
 
     function handleSend(e) {
         e.preventDefault();
-        setShow(!show);
         setEmail(email);
     }
-
-    useEffect(() => {
-        axios.get("http://localhost:2318/players/groups")
-            .then((response) => {
-                console.log("dashboard response: " , response);
-                setDashboardData(response.data);
-            })
-    }, [email]);
     
   return (
-   <Box 
-    m='1.5rem 2.5rem'
-    width={500}
-   >
-        <Box 
+         <Box 
             sx={{ 
                 display: 'flex', 
                 flexDirection: 'column',
                 gap: '15px',
             }}
+            m='1.5rem 2.5rem'
+            width={500}
         >
             <Box
                 sx={{ 
@@ -81,12 +68,7 @@ function Dashboard() {
                 </Button>
             </Box>
         </Box>
-       {show ? <div><Typography>My Group Page</Typography>
-        <CardContent>
-            <Typography>{dashboardData.groupName}</Typography>
-        </CardContent> </div> : null}
-   </Box>
   )
 }
 
-export default Dashboard
+export default RetrievePage

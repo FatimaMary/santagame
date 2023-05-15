@@ -58,3 +58,21 @@ export const getGroupById = (req, res) => {
       .catch((err) => res.status(400).json({ message: err.message }));
   };
 
+export const getDetailsByEmail = (req, res) => {
+  const email = req.body.email;
+  PlayGroup.find({ organiserEmail: email })
+      .then((players) => {
+        if (players.length === 0) {
+          res.status(404).json({ message: 'No one players in this group' });
+        } else {
+          const friendsDetails = players.map(player => {
+            return {
+              groupId: player.groupId,
+              friendsName: player.friendsName,
+            };
+          });
+          res.json(friendsDetails);
+        }
+      })
+      .catch((err) => res.status(400).json({ message: err.message }));
+}

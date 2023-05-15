@@ -8,7 +8,7 @@ function GiftExchangePage1() {
     const navigate = useNavigate();
     const [searchParam] = useSearchParams();
     const groupId = searchParam.get("groupId");
-    // const [names, setNames] = useState([]);
+    const [names, setNames] = useState([]);
     const [groupData, setgroupData] = useState([])
 
     useEffect(() => {
@@ -16,7 +16,9 @@ function GiftExchangePage1() {
       axios.get(`http://localhost:2318/group/single/${groupId}`)
         .then(res => {
           console.log("response" , res.data);
+          console.log(" friends Name: ", res.data.friendsName);
           setgroupData(res.data);
+          setNames(res.data.friendsName);
         })
     }, []);
 
@@ -54,7 +56,7 @@ function GiftExchangePage1() {
           // fontWeight='bold'
         >
           {groupData.organiserName} invites to draw names for <b>{groupData.groupName}</b> with {groupData.organiserName}
-         
+         , {names[0]}, {names[1]}, {names[2]}, {names[3]}.
         </Typography>
         <Box 
           display='flex'
