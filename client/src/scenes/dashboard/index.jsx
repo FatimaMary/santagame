@@ -38,8 +38,8 @@ function Dashboard() {
         >
             My Group Page
         </Typography>
-        {dashboardData.map((cardData) => (
-            <Card sx={{ width: 350, m: '1.5rem' }}>
+        {dashboardData.map((cardData, i) => (
+            <Card sx={{ width: 350, m: '1.5rem' }} key={i}>
             <CardContent>
               <Typography sx={{ fontSize: 16 }}  variant='h6' fontWeight='bold' color='red' >
                {cardData.groupName}

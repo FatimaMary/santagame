@@ -114,31 +114,6 @@ export const updateGroupPlayer = (req, res) => {
       .catch((err) => res.status(400).json({ message: err.message }));
   }
 
-  // export const updateFriendsArray = (req, res) => {
-  //   const groupName = req.body.groupName;
-  //   GroupPlayer.find({ groupName: groupName})
-  //     .then((players) => {
-  //       if(players.length === 0) {
-  //         res.status(404).json({ message: 'No one player in this group' });
-  //       } else {
-  //         const playerIds = players.map(player => {
-  //           return {
-  //             groupId: player.groupId,
-  //             playerId: player.playerId,
-  //           };
-  //         });
-  //         // res.json(playerIds);
-  //         const groupId = playerIds.groupId;
-  //         PlayGroup.updateOne({ groupId: groupId }, {$set: {
-  //           friendsName: playerIds.playerId
-  //       }})
-  //       .then((data) => res.json(data))
-  //       .catch((err) => res.status(400).json({ error: err }));
-  //       }
-  //     })
-  //     .catch((err) => res.status(400).json({ message: err.message }));
-  // }
-
   export const updateFriendsArray = async (req, res) => {
     try {
       const groupName = req.body.groupName;
@@ -155,7 +130,7 @@ export const updateGroupPlayer = (req, res) => {
         };
       });
   
-      const groupId = playerIds[0].groupId; // Assuming there's only one groupId
+      const groupId = playerIds[0].groupId;
       const updateResult = await PlayGroup.updateOne(
         { groupId: groupId },
         {
