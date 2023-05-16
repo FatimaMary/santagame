@@ -48,7 +48,7 @@ function Dashboard() {
                 {cardData.giftExchangeDate}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {cardData. friendsName[0]}, {cardData. friendsName[1]}, {cardData. friendsName[2]}, {cardData. friendsName[3]}
+                {cardData.organiserName}, {cardData. friendsName[0]}, {cardData. friendsName[1]}, {cardData. friendsName[2]}, {cardData. friendsName[3]}
               </Typography>
             </CardContent>
           </Card>

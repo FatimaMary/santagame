@@ -58,35 +58,6 @@ export const updateGroupPlayer = (req, res) => {
     .catch((err) => res.status(400).json({ message: err.message }));
   }
 
-  
-  // export const getGroupsByEmail = (req, res) => {
-  //   const email = req.body.email;
-  //   GroupPlayer.find({ playerEmail: email })
-  //     .then((player) => {
-  //       if(!player) {
-  //         res.status(404).json({ message: 'you are not in any group' });
-  //       } else {
-  //         res.json(player);
-  //       }
-  //     })
-  //     .catch((err) => res.status(400).json({ message: err.message }));
-  // }
-
-  
-  export const getGroupsNameByEmail = (req, res) => {
-    const email = req.body.email;
-    GroupPlayer.find({ playerEmail: email })
-      .then((players) => {
-        if (players.length === 0) {
-          res.status(404).json({ message: 'you are not in any group' });
-        } else {
-          const groupNames = players.map(player => player.groupName); 
-          res.json(groupNames);
-        }
-      })
-      .catch((err) => res.status(400).json({ message: err.message }));
-  }
-  
   export const getFullDetailsByEmail = (req, res) => {
     const email = req.params.email;
     console.log("email: ", email)
@@ -111,6 +82,7 @@ export const updateGroupPlayer = (req, res) => {
                 const friendsDetails = friends.map(friend => {
                   return {
                     groupName: friend.groupName,
+                    organiserName: friend.organiserName,
                     friendsName: friend.friendsName,
                     giftExchangeDate: friend.giftExchangeDate,
                   }
@@ -141,23 +113,61 @@ export const updateGroupPlayer = (req, res) => {
       })
       .catch((err) => res.status(400).json({ message: err.message }));
   }
+
+  // export const updateFriendsArray = (req, res) => {
+  //   const groupName = req.body.groupName;
+  //   GroupPlayer.find({ groupName: groupName})
+  //     .then((players) => {
+  //       if(players.length === 0) {
+  //         res.status(404).json({ message: 'No one player in this group' });
+  //       } else {
+  //         const playerIds = players.map(player => {
+  //           return {
+  //             groupId: player.groupId,
+  //             playerId: player.playerId,
+  //           };
+  //         });
+  //         // res.json(playerIds);
+  //         const groupId = playerIds.groupId;
+  //         PlayGroup.updateOne({ groupId: groupId }, {$set: {
+  //           friendsName: playerIds.playerId
+  //       }})
+  //       .then((data) => res.json(data))
+  //       .catch((err) => res.status(400).json({ error: err }));
+  //       }
+  //     })
+  //     .catch((err) => res.status(400).json({ message: err.message }));
+  // }
+
+  export const updateFriendsArray = async (req, res) => {
+    try {
+      const groupName = req.body.groupName;
+      const players = await GroupPlayer.find({ groupName: groupName });
   
-  export const getGroupsByEmail = (req, res) => {
-    const email = req.body.email;
-    GroupPlayer.find({ playerEmail: email })
-      .then((players) => {
-        if (players.length === 0) {
-          res.status(404).json({ message: 'you are not in any group' });
-        } else {
-          const groups = players.map(player => {
-            return {
-              groupId: player.groupId,
-              groupName: player.groupName
-            };
-          });
-          res.json(groups);
+      if (players.length === 0) {
+        return res.status(404).json({ message: 'No players in this group' });
+      }
+  
+      const playerIds = players.map((player) => {
+        return {
+          groupId: player.groupId,
+          playerId: player.playerId,
+        };
+      });
+  
+      const groupId = playerIds[0].groupId; // Assuming there's only one groupId
+      const updateResult = await PlayGroup.updateOne(
+        { groupId: groupId },
+        {
+          $set: {
+            friendsName: playerIds.map((player) => player.playerId),
+          },
         }
-      })
-      .catch((err) => res.status(400).json({ message: err.message }));
-  }
+      );
+  
+      return res.json(updateResult);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  };
   

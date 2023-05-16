@@ -17,7 +17,6 @@ function RetrievePage() {
     function handleSend(e) {
         e.preventDefault();
         console.log("e.target.value: ", playerEmail);
-        // const email = playerEmail
         navigate(`/dashboard?email=${playerEmail}`)
     }
     
