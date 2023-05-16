@@ -11,12 +11,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function RetrievePage() {
-    const [email, setEmail] = useState();
+    const [playerEmail, setPlayerEmail] = useState();
     const navigate = useNavigate();
 
     function handleSend(e) {
         e.preventDefault();
-        navigate(`/dashboard?email=${email}`)
+        console.log("e.target.value: ", playerEmail);
+        // const email = playerEmail
+        navigate(`/dashboard?email=${playerEmail}`)
     }
     
   return (
@@ -45,15 +47,16 @@ function RetrievePage() {
                 <Typography>View your wish list and your drawn name on the group page.</Typography>
                 <Typography>Enter your email address and we will resend it. You can also create an account for easy access.</Typography>
             </Box>
-            <Box>
+            <Box >
                 <Typography>Your email</Typography>
                 <TextField
+                    id="outlined-basic" label="Email" variant="outlined"
                     placeholder='Enter Your Email'
                     sx={{
                         width: '300px',
                     }}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={playerEmail}
+                    onChange={(e) => setPlayerEmail(e.target.value)}
                 />
             </Box>
             <Box ml={6}

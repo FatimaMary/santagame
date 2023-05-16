@@ -46,6 +46,10 @@ export const api = createApi({
             query: (id) => `players/get/${id}`,
             providesTags: ["GroupPlayer"],
         }),
+        getFullDetailsByEmail: build.query({
+            query: (email) => `players/details/${email}`,
+            providesTags: ["GroupPlayer"],
+        }),
     }),
 });
 
@@ -60,4 +64,5 @@ export const {
     useUpdateGroupPlayerQuery,
     useGetAllPlayersByIdQuery,
     useGetGroupByIdQuery,
+    useGetFullDetailsByEmailQuery,
 } = api;
