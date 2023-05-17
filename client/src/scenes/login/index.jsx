@@ -55,9 +55,11 @@ function Login() {
         <Box>
             <Typography variant='h3'>Login</Typography>
             <Typography type='text'>Login to my WishList.</Typography>
-            {/* <Typography type='text'>(If you don't have an account yet, Kindly
+        </Box>
+        <Box>
+            <Typography type='text'>(If you don't have an account yet, Kindly
                 <Link to='/register'>Register Here </Link>)
-            </Typography> */}
+            </Typography>
         </Box>
         <form onSubmit={handleLogin}>
             <Box
@@ -115,13 +117,15 @@ function Login() {
                 >
                     <Button 
                         sx={{ 
-                            border: '2px solid skyblue',
+                            border: '2px solid green',
                             borderRadius: '20px',
-                            width: '200px',
+                            width: '150px',
                             fontSize: '1rem',
                             color: 'green',
+                            fontWeight: 'bold'
                         }}
-                    type="submit"
+                        type="submit"
+                        
                     >
                         Login
                     </Button>

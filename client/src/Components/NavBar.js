@@ -1,16 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { menu } from "react-icons-kit/feather/menu";
-// import { Link } from "react-router-dom";
 import { x } from "react-icons-kit/feather/x";
 import "../App.css";
 
+
 export const NavBar = () => {
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setToggle(!toggle);
   };
+
+  const handleClick = () => {
+    navigate("/login");
+  }
 
   return (
     <nav className={toggle ? "navbar expanded" : "navbar"}>
@@ -21,11 +27,11 @@ export const NavBar = () => {
       <ul className="links">
         <li>My Wishlist</li>
         <li>Secret Santa</li>
-        <li>
+        <li onClick={handleClick}>
           Login
-          {/* <Link to="/Login">Login</Link> */}
         </li>
         <li>Help</li>
+        <li onClick={() => navigate("/retrieve")}>SignIn</li>
       </ul>
     </nav>
   );

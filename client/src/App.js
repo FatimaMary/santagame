@@ -20,8 +20,9 @@ import RetrievePage from './scenes/retrievepage';
 function App() {
   return (
     <div className="app">
-      <NavBar/>
+      {/* <NavBar/> */}
       <BrowserRouter>
+      <NavBar/>
         <Routes>
           <Route path='/' element={<Register/>} />
           <Route path='login' element={<Login/>}/>
