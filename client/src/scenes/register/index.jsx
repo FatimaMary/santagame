@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from '../../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import Slider from '../slider/Slider';
+import { slidesData } from '../slider/slidesData';
 
 function Register() {
     const [registerData, setRegisterData] = useState({
@@ -76,126 +78,139 @@ function Register() {
             })
     }
 
+    const handleClick = () => {
+        console.log("Login Button Clicked")
+        navigate("/login");
+    }
+
   return (
-    <Box 
-      sx={{
-        display: 'flex', 
-        flexDirection: 'column' ,
-        // justifyContent: 'space-around',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }}
-      mt='50px'
-      color='blue'
-    >
-        <Box>
-            <Typography
-                variant='h3'
-            >
-                Register Here
-            </Typography>
-            <Typography 
-                variant='h4'
-            >
-                It's Free!
-            </Typography>
-            <Typography
-                variant='h6'
-            >
-                Register to get started on your wishlist immediately
-            </Typography>
-        </Box>
-        <form onSubmit={handleSubmit}>
-            <Box
-                sx={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    gap: '10px', 
-                }}
-            >
-                <TextField 
-                    // id="outlined-basic" 
-                    label="Name" 
-                    variant="outlined" 
-                    sx={{
-                        margin: '1rem',
-                        width: '400px',
-                        borderRadius: '10px',
-                    }}
-                    type='text'
-                    name='name'
-                    value={registerData.name}
-                    onChange={updateHandleChange}
-                />
-                <TextField 
-                    // id="outlined-basic" 
-                    label="Mobile Number" 
-                    variant="outlined" 
-                    sx={{
-                        margin: '1rem',
-                        width: '400px',
-                        borderRadius: '10px',
-                    }}
-                    type='text'
-                    name='mobileNumber'
-                    value={registerData.mobileNumber}
-                    onChange={updateHandleChange}
-                />
-                {errors.name && <p className="error">{errors.name}</p>}
-                <TextField 
-                    // id="outlined-basic" 
-                    label="Email" 
-                    variant="outlined" 
-                    sx={{
-                        margin: '1rem',
-                        width: '400px',
-                        borderRadius: '10px',
-                    }}
-                    type='email'
-                    name='email'
-                    value={registerData.email}
-                    onChange={updateHandleChange}
-                />
-                {errors.email && <p className="error">{errors.email}</p>}
-                <TextField 
-                    // id='outlined-basic' 
-                    label='Password' 
-                    variant='outlined' 
-                    sx={{
-                        margin: '1rem',
-                        width: '400px',
-                        borderRadius: '10px',
-                    }}
-                    type='password'
-                    name='password'
-                    value={registerData.password}
-                    onChange={updateHandleChange}
-                />
-                {errors.password && <p className="error">{errors.password}</p>}
-                <Box 
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}
-                    mb='15px'
+    <Box display="flex" width="100%" height="100%" m='1.5rem 2.5rem'>
+        <Box 
+        sx={{
+            display: 'flex', 
+            flexDirection: 'column' ,
+            // justifyContent: 'space-around',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}
+        // mt='50px'
+        color='blue'
+        width='50%'
+        height="100%"
+        m='1.5rem 2.5rem'
+        >
+            <Box>
+                <Typography
+                    variant='h3'
                 >
-                    <Button 
-                        sx={{ 
-                            border: '2px solid skyblue',
-                            borderRadius: '20px',
-                            width: '200px',
-                            fontSize: '1rem',
-                            color: 'green',
-                        }}
-                    type="submit"
-                    >
-                        Register
-                    </Button>
-                    {err && <span>Something went wrong</span>}
-                </Box>
+                    Register Here
+                </Typography>
+                <Typography 
+                    variant='h4'
+                >
+                    It's Free!
+                </Typography>
+                <Typography
+                    variant='h6'
+                >
+                    Register to get started on your wishlist immediately
+                </Typography>
             </Box>
-        </form>
-        <Typography>You do have an account? Login</Typography>
+            <form onSubmit={handleSubmit}>
+                <Box
+                    sx={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        gap: '10px', 
+                    }}
+                >
+                    <TextField 
+                        // id="outlined-basic" 
+                        label="Name" 
+                        variant="outlined" 
+                        sx={{
+                            margin: '1rem',
+                            width: '400px',
+                            borderRadius: '10px',
+                        }}
+                        type='text'
+                        name='name'
+                        value={registerData.name}
+                        onChange={updateHandleChange}
+                    />
+                    <TextField 
+                        // id="outlined-basic" 
+                        label="Mobile Number" 
+                        variant="outlined" 
+                        sx={{
+                            margin: '1rem',
+                            width: '400px',
+                            borderRadius: '10px',
+                        }}
+                        type='text'
+                        name='mobileNumber'
+                        value={registerData.mobileNumber}
+                        onChange={updateHandleChange}
+                    />
+                    {errors.name && <p className="error">{errors.name}</p>}
+                    <TextField 
+                        // id="outlined-basic" 
+                        label="Email" 
+                        variant="outlined" 
+                        sx={{
+                            margin: '1rem',
+                            width: '400px',
+                            borderRadius: '10px',
+                        }}
+                        type='email'
+                        name='email'
+                        value={registerData.email}
+                        onChange={updateHandleChange}
+                    />
+                    {errors.email && <p className="error">{errors.email}</p>}
+                    <TextField 
+                        // id='outlined-basic' 
+                        label='Password' 
+                        variant='outlined' 
+                        sx={{
+                            margin: '1rem',
+                            width: '400px',
+                            borderRadius: '10px',
+                        }}
+                        type='password'
+                        name='password'
+                        value={registerData.password}
+                        onChange={updateHandleChange}
+                    />
+                    {errors.password && <p className="error">{errors.password}</p>}
+                    <Box 
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                        mb='15px'
+                    >
+                        <Button 
+                            sx={{ 
+                                border: '2px solid skyblue',
+                                borderRadius: '20px',
+                                width: '200px',
+                                fontSize: '1rem',
+                                color: 'green',
+                            }}
+                        type="submit"
+                        >
+                            Register
+                        </Button>
+                        {err && <span>Something went wrong</span>}
+                    </Box>
+                </Box>
+            </form>
+            <Typography>You do have an account? <Button onClick={handleClick}>Login</Button></Typography>
+        </Box>
+        <Box>
+            <Slider slides={slidesData} />
+        </Box>
     </Box>
   )
 }

@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import axios from 'axios';
+import borderImage from '../../assets/Background6.png';
 
 function GiftExchangePage2() {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ function GiftExchangePage2() {
   const [searchParam] = useSearchParams();
   const playerId = searchParam.get("playerId");
   const groupId = searchParam.get("groupId");
-  const [names, setNames] = useState([])
+  const [names, setNames] = useState([]);
+  const [organiser, setOrganiser] = useState({});
 
   
 
@@ -26,7 +28,9 @@ function GiftExchangePage2() {
     axios.get(`http://localhost:2318/group/single/${groupId}`)
       .then(res => {
         console.log("response" , res);
+        console.log("organiser name: ", res.data.organiserName);
         setNames(res.data.friendsName);
+        setOrganiser(res.data.organiserName);
       })
   }, []);
   
@@ -51,11 +55,14 @@ function GiftExchangePage2() {
   return (
     <Box 
       m='1.5rem 2.5rem'
-      sx={{ display: 'flex', flexDirection: 'column', gap: '20px', 
-      // border: '30px solid transparent',
-      // padding:'15px',
-      // borderImage: 'url(../../assets/Background6.png) 50 round' 
-    }}
+      sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '20px',  
+      }}
+      // border= {1}
+      // borderImage= "url(../../assets/Background6.png) 30 round"
+      // p={2}
     width={400}
     >
       <Box>
@@ -81,6 +88,7 @@ function GiftExchangePage2() {
           sx={{ width: '300px' }}
           placeholder='Player name'
         >
+          <MenuItem value={organiser}>{organiser}</MenuItem>
          {names.map((name) => (
           <MenuItem 
             key={name}
