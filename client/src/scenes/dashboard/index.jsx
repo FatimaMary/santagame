@@ -11,6 +11,8 @@ import {
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 // import { useGetFullDetailsByEmailQuery } from '../../state/api';
+import Slider from '../slider/Slider';
+import { slidesData } from '../slider/slidesData';
 
 function Dashboard() {
     const [dashboardData, setDashboardData] = useState([]);
@@ -28,10 +30,11 @@ function Dashboard() {
     }, []);
     
   return (
-   <Box 
-    m='1.5rem 2.5rem'
-    width={500}
-   >
+    <Box display="flex" width="100%" height="100%" m='1.5rem 2.5rem'>
+      <Box 
+        m='1.5rem 2.5rem'
+        width='50%'
+      >
         <Typography
             variant='h5'
             color='green'
@@ -48,12 +51,17 @@ function Dashboard() {
                 {cardData.giftExchangeDate}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {cardData.organiserName}, {cardData. friendsName[0]}, {cardData. friendsName[1]}, {cardData. friendsName[2]}, {cardData. friendsName[3]}
+                {/* {cardData.organiserName}, {cardData. friendsName[0]}, {cardData. friendsName[1]}, {cardData. friendsName[2]}, {cardData. friendsName[3]} */}
               </Typography>
             </CardContent>
           </Card>
         )) }
-   </Box>
+      </Box>
+      <Box>
+        <Slider slides = {slidesData} />
+      </Box>
+    </Box>
+   
   )
 }
 
