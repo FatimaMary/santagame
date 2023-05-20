@@ -27,7 +27,7 @@ const ProductsSchema = new mongoose.Schema({
     },
     wishlistId: {
         type: Number,
-        // require: true
+        require: true
     },
 });
 
