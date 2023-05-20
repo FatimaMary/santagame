@@ -27,7 +27,7 @@ const ProductsSchema = new mongoose.Schema({
     },
     wishlistId: {
         type: Number,
-        unique: true,
+        // require: true
     },
 });
 
@@ -38,6 +38,6 @@ ProductsSchema.plugin(autoIncrement.plugin, {
     incrementBy: 1,
 });
 
-const Products = mongoose.model("Products", ProductsSchema);
+const GiftProducts = mongoose.model("GiftProducts", ProductsSchema);
 
-export default Products; 
+export default GiftProducts; 

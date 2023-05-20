@@ -1,4 +1,4 @@
-import Products from '../models/Products.js';
+import GiftProducts from '../models/Products.js';
 
 export const postProduct = (req, res) => {
     const productUrl = req.body.productUrl;
@@ -7,7 +7,7 @@ export const postProduct = (req, res) => {
     const description = req. body. description;
     const wishlistId = req.body.wishlistId;
 
-    const newProduct = new Products({
+    const newProduct = new GiftProducts({
         productUrl,
         price,
         productName,
@@ -22,11 +22,18 @@ export const postProduct = (req, res) => {
 };
 
 export const getProducts = (req, res) => {
-    Products.find()
+    GiftProducts.find()
         .then((products) => res.json(products))
         .catch((err) => res.status(400).json({ err: err.message}));
 };
 
 export const deleteProduct = (req, res) => {
-    Products.deleteOne()
-}
+    const productId = req.params.productId;
+    GiftProducts.deleteOne({ productId: productId })
+        .then(() => {
+            res.status(200).json({ message: "Product deleted successfully" });
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'Error deleting product', details: error});
+        });
+};

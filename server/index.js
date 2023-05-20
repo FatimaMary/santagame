@@ -27,7 +27,7 @@ app.use("/giftuser", userRoutes);
 app.use("/group", playGroupRoutes);
 app.use("/players", groupPlayersRoutes);
 app.use("/wishlist", wishlistRoutes);
-app.use("/products", productRoutes);
+app.use("/giftproducts", productRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
