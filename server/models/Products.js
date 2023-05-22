@@ -32,7 +32,7 @@ const ProductsSchema = new mongoose.Schema({
 });
 
 ProductsSchema.plugin(autoIncrement.plugin, {
-    model: "Product",
+    model: "GiftProducts",
     field: "productId",
     startAt: 1,
     incrementBy: 1,

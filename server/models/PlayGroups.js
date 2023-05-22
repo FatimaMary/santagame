@@ -36,11 +36,14 @@ const GroupNamesSchema = new mongoose.Schema({
     createdBy: {
         type: String,
         required: true
+    },
+    friendsIdArray: {
+        type: Array,
     }
 });
 
 GroupNamesSchema.plugin(autoIncrement.plugin, {
-    model: "Groupname",
+    model: "Play Group",
     field: "groupId",
     startAt: 1,
     incrementBy: 1,

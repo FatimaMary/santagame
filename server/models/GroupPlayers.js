@@ -35,7 +35,7 @@ const GroupPlayersSchema = new mongoose.Schema({
 });
 
 GroupPlayersSchema.plugin(autoIncrement.plugin, {
-    model: "GroupPlayer",
+    model: "groupPlayer",
     field: "playerId",
     startAt: 1,
     incrementBy: 1,

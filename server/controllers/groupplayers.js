@@ -157,18 +157,16 @@ export const updateGroupPlayer = (req, res) => {
   
       const friendData = players.map((player) => {
         return {
-          // groupId: player.groupId,
           playerId: player.playerId,
           playerName: player.playerName, 
         };
       });
-  
       const groupId = players[0].groupId;
       const updateResult = await PlayGroup.updateOne(
         { groupId: groupId },
         {
           $set: {
-            friendsName: friendData,
+            friendsIdArray: friendData,
           },
         }
       );

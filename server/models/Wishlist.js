@@ -24,7 +24,7 @@ const WishlistSchema = new mongoose.Schema({
 });
 
 WishlistSchema.plugin(autoIncrement.plugin, {
-    model: "Wishlist",
+    model: "wishlists",
     field: "wishlistId",
     startAt: 1,
     incrementBy: 1,
