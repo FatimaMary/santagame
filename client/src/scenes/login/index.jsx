@@ -9,9 +9,7 @@ import { auth } from '../../firebase';
 function Login() {
     const navigate = useNavigate();
     const [err, setErr] = useState(false);
-    // const [email, setEmail] = useState();
     const [name, setName] = useState();
-    // const [password, setPassword] = useState();
     const [errors, setErrors] = useState({});
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
     const [loginData, setLoginData] = useState({
@@ -37,7 +35,7 @@ function Login() {
                 navigate(`/groupcreate?userId=${res.user.uid}`)
             })
         console.log("button clicked");
-        alert("Form submitted");
+        // alert("Form submitted");
     }
 
   return (
@@ -73,6 +71,7 @@ function Login() {
                     id="outlined-basic-name" 
                     name="name"
                     label="Name" 
+                    type='text'
                     variant="outlined" 
                     sx={{
                         margin: '1rem',
@@ -85,7 +84,8 @@ function Login() {
                 <TextField 
                     id="outlined-basic-email"
                     name='email' 
-                    label="Email" 
+                    label="Email"
+                    type='email'
                     variant="outlined" 
                     sx={{
                         margin: '1rem',
@@ -99,6 +99,7 @@ function Login() {
                     id='outlined-basic-password'
                     name='password' 
                     label='Password' 
+                    type='password'
                     variant='outlined' 
                     sx={{
                         margin: '1rem',

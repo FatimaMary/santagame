@@ -146,9 +146,49 @@ export const updateGroupPlayer = (req, res) => {
   //   }
   // };
   
+  // export const updateFriendsArray = async (req, res) => {
+  //   try {
+  //     const groupName = req.body.groupName;
+  //     const players = await GroupPlayer.find({ groupName: groupName });
+  
+  //     if (players.length === 0) {
+  //       return res.status(404).json({ message: 'No players in this group' });
+  //     }
+  
+  //     const friendData = players.map((player) => {
+  //       return {
+  //         playerId: player.playerId,
+  //         playerName: player.playerName, 
+  //       };
+  //     });
+  //     const groupId = players[0].groupId;
+  //     const updateResult = await PlayGroup.updateOne(
+  //       { groupId: groupId },
+  //       {
+  //         $set: {
+  //           friendsIdArray: friendData,
+  //         },
+  //       }
+  //     );
+  
+  //     return res.json(updateResult);
+  //   } catch (error) {
+  //     return res.status(400).json({ error: error.message });
+  //   }
+  // };
+  
   export const updateFriendsArray = async (req, res) => {
     try {
-      const groupName = req.body.groupName;
+      const groupId = req.body.groupId;
+      
+      // Find the PlayGroup document based on groupId
+      const playGroup = await PlayGroup.findOne({ groupId: groupId });
+      
+      if (!playGroup) {
+        return res.status(404).json({ message: 'Group not found' });
+      }
+      
+      const groupName = playGroup.groupName;
       const players = await GroupPlayer.find({ groupName: groupName });
   
       if (players.length === 0) {
@@ -158,10 +198,10 @@ export const updateGroupPlayer = (req, res) => {
       const friendData = players.map((player) => {
         return {
           playerId: player.playerId,
-          playerName: player.playerName, 
+          playerName: player.playerName,
         };
       });
-      const groupId = players[0].groupId;
+  
       const updateResult = await PlayGroup.updateOne(
         { groupId: groupId },
         {
