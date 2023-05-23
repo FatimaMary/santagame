@@ -67,7 +67,7 @@ function Login() {
                 gap: '10px', 
             }}
             >
-                <TextField 
+                {/* <TextField 
                     id="outlined-basic-name" 
                     name="name"
                     label="Name" 
@@ -80,7 +80,7 @@ function Login() {
                     }}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                />
+                /> */}
                 <TextField 
                     id="outlined-basic-email"
                     name='email' 
