@@ -75,4 +75,84 @@ export const getDetailsByEmail = (req, res) => {
         }
       })
       .catch((err) => res.status(400).json({ message: err.message }));
-}
+};
+
+// export const getDrawnNames = async(req, res) => {
+//   try {
+//     const groupId = req.params.groupId;
+
+//     const namesCollection = PlayGroup('friendsName')
+
+//     const playGroup = await PlayGroup.findOne({ groupId: groupId });
+      
+//     if (!playGroup) {
+//       return res.status(404).json({ message: 'Group not found' });
+//     }
+
+//     const names = playGroup. friendsName;
+
+//     function shuffleArray(array) {
+//       for (let i = array.length - 1; i > 0; i--) {
+//         const j = Math.floor(Math.random() * (i + 1));
+//         [array[i], array[j]] = [array[j], array[i]];
+//       }
+//     }
+
+//     shuffleArray(names);
+//     const pairings = names.map((giver, index) => ({
+//       giver,
+//       receiver: names[(index + 1) % names.length]
+//     }));
+//     await namesCollection.insertMany(pairings);
+//     const retrievedPairings = await namesCollection.find().toArray();
+//     retrievedPairings.forEach(pairing => {
+//       console.log(`${pairing.giver} is the Secret Santa for ${pairing.receiver}`);
+//     });
+//   }
+//   catch (err) {
+//     return res.status(400).json({ error: err.message });
+//   }
+// }
+
+export const getDrawnNames = async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+
+    const playGroup = await PlayGroup.findOne({ groupId: groupId });
+
+    if (!playGroup) {
+      return res.status(404).json({ message: 'Group not found' });
+    }
+
+    const names = playGroup.friendsName;
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    shuffleArray(names);
+    const pairings = names.map((giver, index) => ({
+      giver,
+      receiver: names[(index + 1) % names.length],
+    }));
+
+    const namesCollection = await PlayGroup.updateOne(
+      { groupId: groupId },
+      { $set: { friendsName: pairings } }
+    );
+
+    const retrievedPairings = await PlayGroup.findOne({ groupId: groupId });
+
+    retrievedPairings.friendsName.forEach((pairing) => {
+      console.log(`${pairing.giver} is the Secret Santa for ${pairing.receiver}`);
+    });
+
+    return res.status(200).json({ message: 'Secret Santa draw completed' });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
