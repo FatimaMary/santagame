@@ -125,6 +125,9 @@ export const getDrawnNames = async (req, res) => {
     }
 
     const names = playGroup.friendsName;
+    const newNamesArray = names.push(`${playGroup.organiserName}`);
+
+    // console.log(newNamesArray)
 
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
