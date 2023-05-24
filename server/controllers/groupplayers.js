@@ -114,70 +114,7 @@ export const updateGroupPlayer = (req, res) => {
       .catch((err) => res.status(400).json({ message: err.message }));
   }
 
-  // export const updateFriendsArray = async (req, res) => {
-  //   try {
-  //     const groupName = req.body.groupName;
-  //     const players = await GroupPlayer.find({ groupName: groupName });
-  
-  //     if (players.length === 0) {
-  //       return res.status(404).json({ message: 'No players in this group' });
-  //     }
-  
-  //     const playerIds = players.map((player) => {
-  //       return {
-  //         groupId: player.groupId,
-  //         playerId: player.playerId,
-  //       };
-  //     });
-  
-  //     const groupId = playerIds[0].groupId;
-  //     const updateResult = await PlayGroup.updateOne(
-  //       { groupId: groupId },
-  //       {
-  //         $set: {
-  //           friendsName: playerIds.map((player) => player.playerId),
-  //         },
-  //       }
-  //     );
-  
-  //     return res.json(updateResult);
-  //   } catch (error) {
-  //     return res.status(400).json({ error: error.message });
-  //   }
-  // };
-  
-  // export const updateFriendsArray = async (req, res) => {
-  //   try {
-  //     const groupName = req.body.groupName;
-  //     const players = await GroupPlayer.find({ groupName: groupName });
-  
-  //     if (players.length === 0) {
-  //       return res.status(404).json({ message: 'No players in this group' });
-  //     }
-  
-  //     const friendData = players.map((player) => {
-  //       return {
-  //         playerId: player.playerId,
-  //         playerName: player.playerName, 
-  //       };
-  //     });
-  //     const groupId = players[0].groupId;
-  //     const updateResult = await PlayGroup.updateOne(
-  //       { groupId: groupId },
-  //       {
-  //         $set: {
-  //           friendsIdArray: friendData,
-  //         },
-  //       }
-  //     );
-  
-  //     return res.json(updateResult);
-  //   } catch (error) {
-  //     return res.status(400).json({ error: error.message });
-  //   }
-  // };
-  
-  export const updateFriendsArray = async (req, res) => {
+   export const updateFriendsArray = async (req, res) => {
     try {
       const groupId = req.body.groupId;
       

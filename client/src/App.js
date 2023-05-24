@@ -14,7 +14,7 @@ import GiftExchangePage4 from './scenes/giftexchangepage4';
 import GiftFinder from './scenes/giftfinder';
 import Dashboard from './scenes/dashboard';
 import RetrievePage from './scenes/retrievepage';
-
+import Wishlist from './scenes/wishlist';
 
 
 function App() {
@@ -39,6 +39,7 @@ function App() {
           <Route path='giftfinder' element={<GiftFinder/>} />
           <Route path='dashboard' element={<Dashboard/>} />
           <Route path='retrieve' element={<RetrievePage/>} />
+          <Route path='wishlist' element={<Wishlist/>} />
         </Routes>
       </BrowserRouter>
     </div>

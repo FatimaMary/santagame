@@ -78,6 +78,7 @@ function GiftExchangePage2() {
       </Box>
       <Box>
         <Typography>Your own name</Typography>
+        {/* <InputLabel id="demo-select-small-label">Player Name</InputLabel> */}
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -86,7 +87,7 @@ function GiftExchangePage2() {
           onChange={(e) => setPlayerName(e.target.value)}
           onClick={() => setShow(!show)}
           sx={{ width: '300px' }}
-          placeholder='Player name'
+          // placeholder='Player name'
         >
           <MenuItem value={organiser}>{organiser}</MenuItem>
          {names.map((name) => (
