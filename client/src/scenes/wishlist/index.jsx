@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, InputLabel, MenuItem, Select, Typography,  } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Wishlist() {
-const Ages = [];
+    const [age, setAge] = useState();
+    const [gender, setGender] = useState();
+    const navigate = useNavigate();
 
-for (let i = 8; i <= 115; i++) {
-  Ages.push({ value: String(i), label: String(i) });
-}
+    const Ages = [];
+    for (let i = 8; i <= 115; i++) {
+    Ages.push({ value: String(i), label: String(i) });
+    }
 
-console.log(Ages);
+// console.log(Ages);
+
+    const moveToNextPage = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:2318/wishlist/add", {
+            sex: gender,
+            age: age,
+            // playerId: playerId
+        }).then((response) => {
+            console.log("Wishlist Response: " , response);
+            console.log("Wishlist data: " , response.data);
+            navigate(`/giftfinder?wishlistId=${response.data.wishlistId}`);
+        })
+    }
 
   return <Box m='1.5rem 2.5rem'
     display='flex'
@@ -37,7 +55,8 @@ console.log(Ages);
         </FormLabel>
         <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
             name="radio-buttons-group"
         >
             <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -53,9 +72,9 @@ console.log(Ages);
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"
-        // value={age}
+        value={age}
         label="Age"
-        // onChange={handleChange}
+        onChange={(e) => setAge(e.target.value)}
         sx={{
             width: '200px'
         }}
@@ -69,7 +88,12 @@ console.log(Ages);
     </FormControl>
     </Box>
     <Box>
-        <Button variant='contained'>Continue</Button>
+        <Button 
+            variant='contained'
+            onClick={moveToNextPage}
+        >
+            Continue
+        </Button>
     </Box>
   </Box>
 }

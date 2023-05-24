@@ -12,7 +12,7 @@ function CopyInvitation() {
     const copyToClipboard = () => {
         copy(textFieldRef.current.defaultValue);
         setCopyText(textFieldRef.current.defaultValue)
-        alert(`You have copied "${textFieldRef.current.defaultValue}"`);
+        // alert(`You have copied "${textFieldRef.current.defaultValue}"`);
     }
   return (
     <Box 

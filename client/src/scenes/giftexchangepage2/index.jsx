@@ -21,7 +21,6 @@ function GiftExchangePage2() {
   const groupId = searchParam.get("groupId");
   const [names, setNames] = useState([]);
   const [organiser, setOrganiser] = useState({});
-
   
 
   useEffect(() => {
