@@ -135,7 +135,7 @@ export const updateGroupPlayer = (req, res) => {
       const friendData = players.map((player) => {
         return {
           playerId: player.playerId,
-          playerName: player.playerName,
+          // playerName: player.playerName,
         };
       });
   
