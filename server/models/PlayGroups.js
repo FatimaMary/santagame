@@ -43,7 +43,7 @@ const GroupNamesSchema = new mongoose.Schema({
 });
 
 GroupNamesSchema.plugin(autoIncrement.plugin, {
-    model: "Play Group  ",
+    model: "Play Group",
     field: "groupId",
     startAt: 1,
     incrementBy: 1,

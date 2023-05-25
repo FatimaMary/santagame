@@ -6,16 +6,18 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import axios from 'axios';
 import borderImage from '../../assets/Background6.png';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore";
 
 function GiftExchangePage2() {
   const navigate = useNavigate();
-  const [playerEmail, setPlayerEmail] = useState("");
-  const [error, setError] = useState({});
-  const [isEmail, setIsEmail] = useState(false);
-  const [err, setErr] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [playerDetails, setPlayerDetails] = useState({
+    playerEmail: "",
+    playerName: "",
+  })
+  const [errors, setErrors] = useState({});
   const [show, setShow] = useState(true);
-  const [playerName, setPlayerName] = useState("");
   const [searchParam] = useSearchParams();
   const playerId = searchParam.get("playerId");
   const groupId = searchParam.get("groupId");
@@ -32,24 +34,65 @@ function GiftExchangePage2() {
         setOrganiser(res.data.organiserName);
       })
   }, []);
-  
 
-    const handleClick = (e) => {
+    const handleChange = (e) => {
+      setPlayerDetails({
+        ...playerDetails,
+        [e.target.name]: e.target.value
+      })
+    }
+
+    const handleClick = async(e) => {
       e.preventDefault();
-      console.log("player name: ",  playerName);
-      console.log("player email: ", playerEmail);
-      axios.put(`http://localhost:2318/players/update/${playerId}`, {
-        // groupId: groupId,
-        playerName: playerName,
-        playerEmail: playerEmail,
+      // console.log("player name: ",  playerName);
+      // console.log("player email: ", playerEmail);
+      createUserWithEmailAndPassword(auth, playerDetails.playerEmail)
+      .then(async (res) => {
+          const user = res.user;
+          await updateProfile(user, {
+              displayName: playerDetails.playerName
+          });
+          // create profile here
+          await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              name: playerDetails.playerName,
+              email: playerDetails.playerEmail,
+          });
+          console.log("Register with firebase");
+
+          //Make the POST request to your API end point
+          fetch("http://localhost:2318/giftuser/add", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                  userId: user.uid,
+                  name: playerDetails.playerName,
+                  email: playerDetails.playerEmail,
+              }),
+              
+          })
+          .then((response) => response.json())
+          .then((data) => {
+              console.log("data: " , data);
+              console.log("fetch id: ", data.userId);
+          })
+          .catch((error) => {
+              console.log(error);
+              setErrors(error.message);
+          });
+        })
+        axios.put(`http://localhost:2318/players/update/${playerId}`, {
+        playerName: playerDetails.playerName,
+        playerEmail: playerDetails.playerEmail,
       })
       .then((response) => {
         console.log("update response: ",response);
         console.log("update data: ",response.data);
-        navigate(`/giftexchange3?email=${playerEmail}`);
+        navigate(`/giftexchange3?email=${playerDetails.playerEmail}`);
       })
     }
-    // console.log("player name: ",  playerName);
 
   return (
     <Box 
@@ -81,9 +124,10 @@ function GiftExchangePage2() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={playerName}
+          value={playerDetails.playerName}
+          name='playerName'
           label="Player Name"
-          onChange={(e) => setPlayerName(e.target.value)}
+          onChange={handleChange}
           onClick={() => setShow(!show)}
           sx={{ width: '300px' }}
           // placeholder='Player name'
@@ -110,21 +154,41 @@ function GiftExchangePage2() {
                     borderRadius: '10px',
                     // height: '200px'
                 }}
-                value={playerEmail}
-                onChange={(e) => setPlayerEmail(e.target.value)}
+                value={playerDetails.playerEmail}
+                onChange={handleChange}
+                name='playerEmail'
         />
           <Box>
             <Typography>--------- or confirm with just one Click ---------</Typography>
           </Box>
-          <Box sx={{display: 'flex', justifyContent: 'space-around', width:"300px"}}>
+          <Box sx={{
+            display: 'flex', 
+            justifyContent: 'space-around',
+             width:"300px"
+             }}
+          >
           <Box 
-            sx={{ display: 'flex', border:'1px solid blue', alignItems: 'center', borderRadius: '20px', width: '100px', justifyContent: 'space-around'}}
+            sx={{ 
+              display: 'flex', 
+              border:'1px solid blue', 
+              alignItems: 'center', 
+              borderRadius: '20px', 
+              width: '100px', 
+              justifyContent: 'space-around'
+            }}
           >
             <BsFacebook color='skyBlue' />
             <Typography color='skyblue'>Facebook</Typography>
           </Box>
           <Box
-             sx={{ display: 'flex', border:'1px solid blue', alignItems: 'center', borderRadius: '20px', width: '80px', justifyContent: 'space-around'}}
+             sx={{ 
+              display: 'flex', 
+              border:'1px solid blue', 
+              alignItems: 'center', 
+              borderRadius: '20px', 
+              width: '80px', 
+              justifyContent: 'space-around'
+            }}
           >
             <FcGoogle color='green'/>
             <Typography color='green'>Google</Typography>
