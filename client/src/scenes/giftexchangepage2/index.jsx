@@ -41,47 +41,63 @@ function GiftExchangePage2() {
         [e.target.name]: e.target.value
       })
     }
+    function generateUserID(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let userID = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        userID += characters.charAt(randomIndex);
+      }
+      return userID;
+    }
 
-    const handleClick = async(e) => {
+    const handleClick = (e) => {
       e.preventDefault();
       // console.log("player name: ",  playerName);
       // console.log("player email: ", playerEmail);
-      createUserWithEmailAndPassword(auth, playerDetails.playerEmail)
-      .then(async (res) => {
-          const user = res.user;
-          await updateProfile(user, {
-              displayName: playerDetails.playerName
-          });
-          // create profile here
-          await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              name: playerDetails.playerName,
-              email: playerDetails.playerEmail,
-          });
-          console.log("Register with firebase");
+      // createUserWithEmailAndPassword(auth, playerDetails.playerEmail)
+      // .then(async (res) => {
+      //     const user = res.user;
+      //     await updateProfile(user, {
+      //         displayName: playerDetails.playerName
+      //     });
+      //     // create profile here
+      //     await setDoc(doc(db, "users", res.user.uid), {
+      //         uid: res.user.uid,
+      //         name: playerDetails.playerName,
+      //         email: playerDetails.playerEmail,
+      //     });
+      //     console.log("Register with firebase");
 
-          //Make the POST request to your API end point
-          fetch("http://localhost:2318/giftuser/add", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                  userId: user.uid,
-                  name: playerDetails.playerName,
-                  email: playerDetails.playerEmail,
-              }),
+      //     //Make the POST request to your API end point
+      //     fetch("http://localhost:2318/giftuser/add", {
+      //         method: "POST",
+      //         headers: {
+      //             "Content-Type": "application/json",
+      //         },
+      //         body: JSON.stringify({
+      //             userId: user.uid,
+      //             name: playerDetails.playerName,
+      //             email: playerDetails.playerEmail,
+      //         }),
               
-          })
-          .then((response) => response.json())
-          .then((data) => {
-              console.log("data: " , data);
-              console.log("fetch id: ", data.userId);
-          })
-          .catch((error) => {
-              console.log(error);
-              setErrors(error.message);
-          });
+      //     })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //         console.log("data: " , data);
+      //         console.log("fetch id: ", data.userId);
+      //     })
+      //     .catch((error) => {
+      //         console.log(error);
+      //         setErrors(error.message);
+      //     });
+      //   })
+        axios.post('http://localhost:2318/giftuser/add',{
+          userId: generateUserID(10),
+          playerName: playerDetails.playerName,
+        })
+        .then((response) => {
+          console.log("post response: ", response);
         })
         axios.put(`http://localhost:2318/players/update/${playerId}`, {
         playerName: playerDetails.playerName,
