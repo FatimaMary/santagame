@@ -94,7 +94,7 @@ function GiftExchangePage2() {
       //   })
         axios.post('http://localhost:2318/giftuser/add',{
           userId: generateUserID(10),
-          playerName: playerDetails.playerName,
+          name: playerDetails.playerName,
         })
         .then((response) => {
           console.log("post response: ", response);
