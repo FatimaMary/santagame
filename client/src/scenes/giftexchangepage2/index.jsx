@@ -95,6 +95,7 @@ function GiftExchangePage2() {
         axios.post('http://localhost:2318/giftuser/add',{
           userId: generateUserID(10),
           name: playerDetails.playerName,
+          email: playerDetails.playerEmail,
         })
         .then((response) => {
           console.log("post response: ", response);
@@ -225,5 +226,3 @@ function GiftExchangePage2() {
 }
 
 export default GiftExchangePage2
-
-//get player names from group creation page

@@ -102,5 +102,3 @@ function GiftExchangePage1() {
 }
 
 export default GiftExchangePage1;
-
-//Bring Player names, groupname date of exchange, budget, message from group create page,

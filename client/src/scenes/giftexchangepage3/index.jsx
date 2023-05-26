@@ -29,5 +29,3 @@ function GiftExchangePage3() {
 }
 
 export default GiftExchangePage3
-
-//get email id from giftexchangepage2
