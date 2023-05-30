@@ -8,6 +8,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import Slider from '../slider/Slider';
 import { slidesData } from '../slider/slidesData';
+import axios from 'axios';
 
 function Register() {
     const [registerData, setRegisterData] = useState({
@@ -21,6 +22,21 @@ function Register() {
     const navigate = useNavigate();
     const [err, setErr] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [userData, setUserData] = useState([]);
+
+    useEffect(() => {
+      axios.get("http://localhost:2318/giftuser/all")
+        .then(res => {
+            console.log("Register page useeffect response: ", res );
+            console.log("userData: ", res.data);
+            setUserData(res.data);
+        })
+        // axios.get("http://localhost:2318/players/all")
+        // .then(res => {
+        //     console.log("Register page player useEffect:  ", res.data)
+        // })
+    }, []);
+    
 
     const updateHandleChange = (e) => {
         setRegisterData({
@@ -29,54 +45,96 @@ function Register() {
         })
     }
 
-    const handleSubmit = async(e) => {
+    // const handleSubmit =(e) => {
+    //     setLoading(true);
+    //     e.preventDefault();
+    //     // setErrors(RegisterValidation(registerData));
+    //     setDataIsCorrect(true);
+    //     console.log("button clicked")
+    //     if(registerData.name === userData.name) {
+    //         axios.put(`http://localhost:2318/giftuser/update/${registerData.name}`, {
+    //             password: registerData.password,
+    //             mobileNumber: registerData.mobileNumber,
+    //             // userId: 
+    //         }) 
+    //         .then((response) => {
+    //             console.log("update response: ",response);
+    //             console.log("update data: ",response.data);
+    //             // navigate(`/giftexchange3?email=${playerDetails.playerEmail}`);
+    //           })
+    //         }
+    //     // } else {
+    //     //  createUserWithEmailAndPassword(auth, registerData.email, registerData.password)
+    //     //     .then(async (res) => {
+    //     //         const user = res.user;
+    //     //         await updateProfile(user, {
+    //     //             displayName: registerData.name
+    //     //         });
+    //     //         // create profile here
+    //     //         await setDoc(doc(db, "users", res.user.uid), {
+    //     //             uid: res.user.uid,
+    //     //             name: registerData.name,
+    //     //             mobileNumber: registerData.mobileNumber,
+    //     //             email: registerData.email,
+    //     //             password: registerData.password,
+    //     //         });
+    //     //         console.log("Register with firebase");
+
+    //     //         //Make the POST request to your API end point
+    //     //         fetch("http://localhost:2318/giftuser/add", {
+    //     //             method: "POST",
+    //     //             headers: {
+    //     //                 "Content-Type": "application/json",
+    //     //             },
+    //     //             body: JSON.stringify({
+    //     //                 userId: user.uid,
+    //     //                 name: registerData.name,
+    //     //                 mobileNumber: registerData.mobileNumber,
+    //     //                 email: registerData.email,
+    //     //                 password: registerData.password
+    //     //             }),
+                    
+    //     //         })
+    //     //         .then((response) => response.json())
+    //     //         .then((data) => {
+    //     //             console.log("data: " , data);
+    //     //             console.log("fetch id: ", data.userId);
+    //     //             navigate(`/groupcreate?userId=${user.uid}`);
+    //     //         })
+    //     //         .catch((error) => {
+    //     //             console.log(error);
+    //     //             setErrors(error.message);
+    //     //         });
+    //     //     })
+    //     // }
+    // }
+    const handleSubmit = (e) => {
         setLoading(true);
         e.preventDefault();
-        // setErrors(RegisterValidation(registerData));
         setDataIsCorrect(true);
-         createUserWithEmailAndPassword(auth, registerData.email, registerData.password)
-            .then(async (res) => {
-                const user = res.user;
-                await updateProfile(user, {
-                    displayName: registerData.name
-                });
-                // create profile here
-                await setDoc(doc(db, "users", res.user.uid), {
-                    uid: res.user.uid,
-                    name: registerData.name,
-                    mobileNumber: registerData.mobileNumber,
-                    email: registerData.email,
-                    password: registerData.password,
-                });
-                console.log("Register with firebase");
-
-                //Make the POST request to your API end point
-                fetch("http://localhost:2318/giftuser/add", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        userId: user.uid,
-                        name: registerData.name,
-                        mobileNumber: registerData.mobileNumber,
-                        email: registerData.email,
-                        password: registerData.password
-                    }),
-                    
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("data: " , data);
-                    console.log("fetch id: ", data.userId);
-                    navigate(`/groupcreate?userId=${user.uid}`);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setErrors(error.message);
-                });
-            })
-    }
+        console.log("button clicked");
+        
+        // if (registerData.name === userData.name) {
+          axios.put(`http://localhost:2318/giftuser/update/${registerData.name}`, {
+            password: registerData.password,
+            mobileNumber: registerData.mobileNumber,
+          })
+          .then((response) => {
+            console.log("update response: ", response);
+            console.log("update data: ", response.data);
+            
+            // Clear/reset variables
+            setLoading(false);
+            setRegisterData({ name: "", password: "", mobileNumber: "" , email: ""});
+            // setUserData({ name: "", password: "", mobileNumber: "" });
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+            // Handle error if necessary
+          });
+        // }
+      }
+      
 
     const handleClick = () => {
         console.log("Login Button Clicked")

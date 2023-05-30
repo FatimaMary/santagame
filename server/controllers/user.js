@@ -42,16 +42,31 @@ export const getUserById = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 };
 
+// export const updateUser = (req, res) => {
+//     const userId = req.params.userId;
+//     Users.findOne({ userId })
+//         .then((user) => {
+//             user.password = req.body.password;
+
+//             profile
+//                 .save()
+//                 .then(() => res.json("User Updated"))
+//                 .catch((err) => res.status(400).json("Error: " + err));
+//         })
+//         .catch((err) => res.status(400).json("Error: " + err));
+// };
+
 export const updateUser = (req, res) => {
-    const userId = req.params.userId;
-    Users.findOne({ userId })
+    const name = req.params.name;
+    Users.findOne({ name: name})
         .then((user) => {
             user.password = req.body.password;
-
-            profile
+            user.mobileNumber = req.body.mobileNumber;
+            // user.userId = req.body.userId;
+            user
                 .save()
-                .then(() => res.json("User Updated"))
+                .then(() => res.json("user Updated"))
                 .catch((err) => res.status(400).json("Error: " + err));
         })
         .catch((err) => res.status(400).json("Error: " + err));
-};
+}
