@@ -58,43 +58,79 @@ export const updateGroupPlayer = (req, res) => {
     .catch((err) => res.status(400).json({ message: err.message }));
   }
 
+  // export const getFullDetailsByEmail = (req, res) => {
+  //   const email = req.params.email;
+  //   console.log("email: ", email)
+  //   // GroupPlayer.find({ $or: [{ playerEmail: email }, { organiserEmail: email }] })
+  //   GroupPlayer.find({ playerEmail: email })
+  //     .then((players) => {
+  //       if (players.length === 0) {
+  //         res.status(404).json({ message: 'you are not in any group' });
+  //       } else {
+  //         const groups = players.map(player => {
+  //           return {
+  //             groupId: player.groupId,
+  //             groupName: player.groupName
+  //           };
+  //         });
+  //         // res.json(groups);
+  //         const groupId = groups.groupId;
+  //         PlayGroup.find(groupId)
+  //           .then((friends) => {
+  //             if(friends.length === 0) {
+  //               res.status(404).json({ message: 'no one in the play group'});
+  //             } else {
+  //               const friendsDetails = friends.map(friend => {
+  //                 return {
+  //                   groupName: friend.groupName,
+  //                   organiserName: friend.organiserName,
+  //                   friendsName: friend.friendsName,
+  //                   giftExchangeDate: friend.giftExchangeDate,
+  //                 }
+  //               });
+  //               res.json(friendsDetails);
+  //             }
+  //           })
+  //       }
+  //     })
+  //     .catch((err) => res.status(400).json({ message: err.message }));
+  // }
+  
   export const getFullDetailsByEmail = (req, res) => {
     const email = req.params.email;
-    console.log("email: ", email)
-    GroupPlayer.find({ $or: [{ playerEmail: email }, { organiserEmail: email }] })
+    console.log("email: ", email);
+  
+    GroupPlayer.find({ playerEmail: email })
       .then((players) => {
         if (players.length === 0) {
-          res.status(404).json({ message: 'you are not in any group' });
+          res.status(404).json({ message: 'You are not in any group' });
         } else {
-          const groups = players.map(player => {
-            return {
-              groupId: player.groupId,
-              groupName: player.groupName
-            };
-          });
-          // res.json(groups);
-          const groupId = groups.groupId;
-          PlayGroup.find(groupId)
-            .then((friends) => {
-              if(friends.length === 0) {
-                res.status(404).json({ message: 'no one in the play group'});
+          const groupIds = players.map((player) => player.groupId);
+  
+          PlayGroup.find({ groupId: { $in: groupIds } })
+            .then((groups) => {
+              if (groups.length === 0) {
+                res.status(404).json({ message: 'No groups found' });
               } else {
-                const friendsDetails = friends.map(friend => {
+                const groupsDetails = groups.map((group) => {
                   return {
-                    groupName: friend.groupName,
-                    organiserName: friend.organiserName,
-                    friendsName: friend.friendsName,
-                    giftExchangeDate: friend.giftExchangeDate,
-                  }
+                    // groupId: group._id,
+                    groupName: group.groupName,
+                    organiserName: group.organiserName,
+                    friendsName: group.friendsName,
+                    giftExchangeDate: group.giftExchangeDate,
+                  };
                 });
-                res.json(friendsDetails);
+                res.json(groupsDetails);
               }
             })
+            .catch((err) => res.status(500).json({ message: err.message }));
         }
       })
       .catch((err) => res.status(400).json({ message: err.message }));
-  }
+  };
   
+
   export const getIdsByGroupname = (req, res) => {
     const groupName = req.body.groupName;
     GroupPlayer.find({ groupName: groupName })
