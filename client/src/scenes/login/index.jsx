@@ -33,7 +33,7 @@ function Login() {
             .then(async(res) => {
                 console.log(res);
                 // navigate(`/groupcreate?userId=${res.user.uid}`)
-                navigate(`dashboard?emailId=${loginData.email}&userId=${res.user.uid}`)
+                navigate(`/dashboard?email=${loginData.email}&userId=${res.user.uid}`)
             })
         console.log("button clicked");
         // alert("Form submitted");

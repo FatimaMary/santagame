@@ -61,7 +61,7 @@ export const updateGroupPlayer = (req, res) => {
   export const getFullDetailsByEmail = (req, res) => {
     const email = req.params.email;
     console.log("email: ", email)
-    GroupPlayer.find({ playerEmail: email })
+    GroupPlayer.find({ $or: [{ playerEmail: email }, { organiserEmail: email }] })
       .then((players) => {
         if (players.length === 0) {
           res.status(404).json({ message: 'you are not in any group' });
