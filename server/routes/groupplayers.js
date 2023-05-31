@@ -16,8 +16,8 @@ router.post("/add", postGroupPlayer);
 router.get("/all", getAllGroupPlayers);
 router.put("/update/:playerId", updateGroupPlayer);
 router.get("/get/:groupId", getAllPlayersById);
-router.get("/groupname", getIdsByGroupname);
+router.get("/groupname/:groupName", getIdsByGroupname);
 router.get("/details/:email", getFullDetailsByEmail);
-router.put("/array", updateFriendsArray);
+router.put("/array/:groupId", updateFriendsArray);
 
 export default router;

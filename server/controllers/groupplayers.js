@@ -132,17 +132,14 @@ export const updateGroupPlayer = (req, res) => {
   
 
   export const getIdsByGroupname = (req, res) => {
-    const groupName = req.body.groupName;
+    const groupName = req.params.groupName;
     GroupPlayer.find({ groupName: groupName })
       .then((players) => {
         if (players.length === 0) {
           res.status(404).json({ message: 'No one players in this group' });
         } else {
           const playerIds = players.map(player => {
-            return {
-              groupId: player.groupId,
-              playerId: player.playerId,
-            };
+            return player.playerId
           });
           res.json(playerIds);
         }
@@ -152,7 +149,7 @@ export const updateGroupPlayer = (req, res) => {
 
    export const updateFriendsArray = async (req, res) => {
     try {
-      const groupId = req.body.groupId;
+      const groupId = req.params.groupId;
       
       // Find the PlayGroup document based on groupId
       const playGroup = await PlayGroup.findOne({ groupId: groupId });
@@ -169,10 +166,7 @@ export const updateGroupPlayer = (req, res) => {
       }
   
       const friendData = players.map((player) => {
-        return {
-          playerId: player.playerId,
-          // playerName: player.playerName,
-        };
+        return player.playerId
       });
   
       const updateResult = await PlayGroup.updateOne(

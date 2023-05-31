@@ -45,7 +45,7 @@ function Register() {
         })
     }
 
-    const handleSubmit =(e) => {
+    const handleSubmit =async(e) => {
         setLoading(true);
         e.preventDefault();
         // setErrors(RegisterValidation(registerData));
@@ -81,6 +81,7 @@ function Register() {
                 console.log("Register with firebase");
 
                 //Make the POST request to your API end point
+                // MAFD207lkCf6NamFheC7vKGWIL02
                 fetch("http://localhost:2318/giftuser/add", {
                     method: "POST",
                     headers: {

@@ -121,7 +121,7 @@ export default function VerticalLinearStepper() {
     console.log("organiser name: ", organiserName);
     console.log("group name: ", groupName);
     console.log("user Id", createdBy);
-    axios
+        axios
       .post("http://localhost:2318/group/addgroup", {
         organiserName: organiserName,
         friendsName: names,
@@ -132,11 +132,52 @@ export default function VerticalLinearStepper() {
         createdBy: createdBy
       })
       .then((response) => {
-        console.log("Post group response: " , response);
+        console.log("Post group response: ", response);
         console.log("New Group data: ", response.data);
         localStorage.setItem("groupId ", response.data.groupId);
+        names.push(organiserName)
+        console.log("players array: ", names);
+        names.forEach((friendName) => {
+          axios
+            .post("http://localhost:2318/players/add", {
+              invitationAccepted: 'false',
+              playerName: friendName,
+              playerEmail: "",
+              groupName: response.data.groupName,
+              groupId: response.data.groupId,
+            })
+            .then((response) => {
+              console.log("Post friend response:", response);
+              console.log("New Friend data:", response.data);
+              axios
+                .get(`http://localhost:2318/players/groupname/${response.data.groupName}`)
+                .then((friendDataResponse) => {
+                  const friendData = friendDataResponse.data;
+                  axios
+                    .put(`http://localhost:2318/players/array/${response.data.groupId}`, {
+                      friendsIdArray: friendData
+                    })
+                    .then((putResponse) => {
+                      console.log("Put response:", putResponse);
+                    })
+                    .catch((error) => {
+                      console.error("Error updating friends array:", error);
+                    });
+                })
+                .catch((error) => {
+                  console.error("Error fetching friend data:", error);
+                });
+            })
+            .catch((error) => {
+              console.error("Error posting friend:", error);
+            });
+        });
         navigate(`/Message?email=${organiserEmail}`);
       })
+      .catch((error) => {
+        console.error("Error posting group:", error);
+      });
+
     
   };
 
