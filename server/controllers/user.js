@@ -76,7 +76,7 @@ export const getUserByEmail = (req, res) => {
     Users.find({ email: email })
     .then((user) => {
       if (user.length === 0) {
-        res.status(404).json({ message: 'No one users using this email' });
+        res.status(200).json({ message: 'User not found' });
       } else {
         res.json(user);
       }
