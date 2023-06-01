@@ -19,7 +19,7 @@ function GiftExchangePage2() {
   const [errors, setErrors] = useState({});
   const [show, setShow] = useState(true);
   const [searchParam] = useSearchParams();
-  const playerId = searchParam.get("playerId");
+  // const playerId = searchParam.get("playerId");
   const groupId = searchParam.get("groupId");
   const [names, setNames] = useState([]);
   const [organiser, setOrganiser] = useState({});
@@ -53,45 +53,6 @@ function GiftExchangePage2() {
 
     const handleClick = (e) => {
       e.preventDefault();
-      // console.log("player name: ",  playerName);
-      // console.log("player email: ", playerEmail);
-      // createUserWithEmailAndPassword(auth, playerDetails.playerEmail)
-      // .then(async (res) => {
-      //     const user = res.user;
-      //     await updateProfile(user, {
-      //         displayName: playerDetails.playerName
-      //     });
-      //     // create profile here
-      //     await setDoc(doc(db, "users", res.user.uid), {
-      //         uid: res.user.uid,
-      //         name: playerDetails.playerName,
-      //         email: playerDetails.playerEmail,
-      //     });
-      //     console.log("Register with firebase");
-
-      //     //Make the POST request to your API end point
-      //     fetch("http://localhost:2318/giftuser/add", {
-      //         method: "POST",
-      //         headers: {
-      //             "Content-Type": "application/json",
-      //         },
-      //         body: JSON.stringify({
-      //             userId: user.uid,
-      //             name: playerDetails.playerName,
-      //             email: playerDetails.playerEmail,
-      //         }),
-              
-      //     })
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //         console.log("data: " , data);
-      //         console.log("fetch id: ", data.userId);
-      //     })
-      //     .catch((error) => {
-      //         console.log(error);
-      //         setErrors(error.message);
-      //     });
-      //   })
         axios.post('http://localhost:2318/giftuser/add',{
           userId: generateUserID(10),
           name: playerDetails.playerName,
@@ -100,7 +61,7 @@ function GiftExchangePage2() {
         .then((response) => {
           console.log("post response: ", response);
         })
-        axios.put(`http://localhost:2318/players/update/${playerId}`, {
+        axios.put(`http://localhost:2318/players/update/${playerDetails.playerName}/${groupId}`, {
         invitationAccepted: 'true',
         playerEmail: playerDetails.playerEmail,
       })
@@ -119,9 +80,6 @@ function GiftExchangePage2() {
         flexDirection: 'column', 
         gap: '20px',  
       }}
-      // border= {1}
-      // borderImage= "url(../../assets/Background6.png) 30 round"
-      // p={2}
     width={400}
     >
       <Box>
@@ -137,7 +95,7 @@ function GiftExchangePage2() {
       </Box>
       <Box>
         <Typography>Your own name</Typography>
-        {/* <InputLabel id="demo-select-small-label">Player Name</InputLabel> */}
+        <InputLabel id="demo-select-small-label">Player Name</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

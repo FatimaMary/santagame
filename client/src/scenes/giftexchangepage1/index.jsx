@@ -32,7 +32,7 @@ function GiftExchangePage1() {
       // }).then ((response) => {
       //   console.log("player acceptance",response);
       //   console.log("player data", response.data);
-        // navigate(`/giftexchange2?playerId=${response.data.playerId}&groupId=${groupId}`);
+        navigate(`/giftexchange2?groupId=${groupId}`);
       // })
     }
   return (
