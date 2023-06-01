@@ -35,7 +35,8 @@ export const updateGroupPlayer = (req, res) => {
   const playerName = req.params.playerName;
   const groupId = req.params.groupId;
   
-  // console.log("Player Id: " , playerId);
+  console.log("Player Name: " , playerName);
+  console.log("groupId: ", groupId);
   console.log("Request body: " , req.body);
   GroupPlayer.updateOne({ playerName: playerName, groupId: groupId }, { $set: {
     invitationAccepted: req.body.invitationAccepted,
