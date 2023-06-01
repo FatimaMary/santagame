@@ -55,6 +55,7 @@ function GiftExchangePage2() {
       e.preventDefault();
         axios.get(`http://localhost:2318/giftuser/get/${playerDetails.playerEmail}`)
           .then((response) => {
+            console.log("get response: ", response);
             if (response.data.length === 0) {
               axios.post('http://localhost:2318/giftuser/add', {
                 userId: generateUserID(10),
