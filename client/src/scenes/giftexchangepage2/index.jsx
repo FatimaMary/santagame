@@ -62,8 +62,8 @@ function GiftExchangePage2() {
           console.log("post response: ", response);
         })
         axios.put(`http://localhost:2318/players/update/${playerDetails.playerName}/${groupId}`, {
-        invitationAccepted: 'true',
-        playerEmail: playerDetails.playerEmail,
+          invitationAccepted: 'true',
+          playerEmail: playerDetails.playerEmail,
       })
       .then((response) => {
         console.log("update response: ",response);
