@@ -73,9 +73,9 @@ export const updateUser = (req, res) => {
 
 export const getUserByEmail = (req, res) => {
     const email = req.params.email;
-    Users.findOne({email: email})
+    Users.find({ email: email })
     .then((user) => {
-      if (!user) {
+      if (user.length === 0) {
         res.status(404).json({ message: 'No one users using this email' });
       } else {
         res.json(user);
