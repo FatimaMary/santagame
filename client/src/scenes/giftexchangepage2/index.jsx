@@ -53,14 +53,28 @@ function GiftExchangePage2() {
 
     const handleClick = (e) => {
       e.preventDefault();
-        axios.post('http://localhost:2318/giftuser/add',{
-          userId: generateUserID(10),
-          name: playerDetails.playerName,
-          email: playerDetails.playerEmail,
-        })
-        .then((response) => {
-          console.log("post response: ", response);
-        })
+        axios.get(`http://localhost:2318/giftuser/get/${playerDetails.playerEmail}`)
+          .then((response) => {
+            if (response.data.length === 0) {
+              axios.post('http://localhost:2318/giftuser/add', {
+                userId: generateUserID(10),
+                name: playerDetails.playerName,
+                email: playerDetails.playerEmail,
+              })
+              .then((response) => {
+                console.log("Post response: ", response);
+              })
+              .catch((error) => {
+                console.error("Error posting user:", error);
+              });
+            } else {
+              console.log("User already exists");
+            }
+          })
+          .catch((error) => {
+            console.error("Error retrieving user:", error);
+          });
+
         axios.put(`http://localhost:2318/players/update/${playerDetails.playerName}/${groupId}`, {
           invitationAccepted: 'true',
           playerEmail: playerDetails.playerEmail,

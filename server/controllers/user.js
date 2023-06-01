@@ -70,3 +70,16 @@ export const updateUser = (req, res) => {
         })
         .catch((err) => res.status(400).json("Error: " + err));
 }
+
+export const getUserByEmail = (req, res) => {
+    const email = req.params.email;
+    Users.findOne({email: email})
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({ message: 'No one users using this email' });
+      } else {
+        res.json(user);
+      }
+    })
+    .catch((err) => res.status(400).json({ message: err.message }));
+  }
