@@ -32,12 +32,13 @@ export const getAllGroupPlayers = (req, res) => {
 
   
 export const updateGroupPlayer = (req, res) => {
-  const playerId = Number(req.params.playerId);
+  const playerName = req.params.playerName;
+  const groupId = req.params.groupId;
   
-  console.log("Player Id: " , playerId);
+  // console.log("Player Id: " , playerId);
   console.log("Request body: " , req.body);
-  GroupPlayer.updateOne({ playerId: playerId }, { $set: {
-    playerName: req.body.playerName,
+  GroupPlayer.updateOne({ playerName: playerName, groupId: groupId }, { $set: {
+    invitationAccepted: req.body.invitationAccepted,
     playerEmail: req.body.playerEmail,
   }})
 

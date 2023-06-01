@@ -23,17 +23,17 @@ function GiftExchangePage1() {
     }, []);
 
     function moveToNextPage() {
-      axios .post("http://localhost:2318/players/add", {
-        invitationAccepted: 'true',
-        playerName: "",
-        playerEmail: "",
-        groupName: groupData.groupName,
-        groupId: groupId,
-      }).then ((response) => {
-        console.log("player acceptance",response);
-        console.log("player data", response.data);
-        navigate(`/giftexchange2?playerId=${response.data.playerId}&groupId=${groupId}`);
-      })
+      // axios .post("http://localhost:2318/players/add", {
+      //   invitationAccepted: 'true',
+      //   playerName: "",
+      //   playerEmail: "",
+      //   groupName: groupData.groupName,
+      //   groupId: groupId,
+      // }).then ((response) => {
+      //   console.log("player acceptance",response);
+      //   console.log("player data", response.data);
+        // navigate(`/giftexchange2?playerId=${response.data.playerId}&groupId=${groupId}`);
+      // })
     }
   return (
     <Box 
