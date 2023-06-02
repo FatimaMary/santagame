@@ -9,6 +9,7 @@ export const postUser = (req, res) => {
     const mobileNumber = req.body.mobileNumber;
     const email = req.body.email;
     const password = req.body.password;
+    const dummyUserId = req.body.dummyUserId;
 
     const newUser = new Users({
         userId,
@@ -16,6 +17,7 @@ export const postUser = (req, res) => {
         mobileNumber,
         email,
         password,
+        dummyUserId,
     });
 
     newUser

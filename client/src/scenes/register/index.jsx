@@ -45,6 +45,17 @@ function Register() {
         })
     }
 
+    function generateUserID(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let userID = '';
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          userID += characters.charAt(randomIndex);
+        }
+        return userID;
+      }
+
+
     const handleSubmit =async(e) => {
         setLoading(true);
         e.preventDefault();
@@ -92,7 +103,8 @@ function Register() {
                         name: registerData.name,
                         mobileNumber: registerData.mobileNumber,
                         email: registerData.email,
-                        password: registerData.password
+                        password: registerData.password,
+                        dummyUserId: generateUserID(10),
                     }),
                     
                 })

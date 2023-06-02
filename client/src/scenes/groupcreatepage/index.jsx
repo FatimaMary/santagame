@@ -160,7 +160,7 @@ export default function VerticalLinearStepper() {
                     .then((putResponse) => {
                       console.log("Put response:", putResponse);
                     })
-                    .catch((error) => {
+                    .catch((error) => { 
                       console.error("Error updating friends array:", error);
                     });
                 })
@@ -172,7 +172,7 @@ export default function VerticalLinearStepper() {
               console.error("Error posting friend:", error);
             });
         });
-        navigate(`/Message?email=${organiserEmail}`);
+        navigate(`/copyin?email=${response.data.groupId}`);
       })
       .catch((error) => {
         console.error("Error posting group:", error);
